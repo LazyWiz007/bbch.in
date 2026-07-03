@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
+/*
+  BBCH design tokens — "Maillot" (royal blue + jersey yellow).
+  Token names are kept stable so components recolor automatically.
+  Look: bright, rectangular, glossy molded surfaces.
+*/
+@theme {
+  /* Brand core — blue is the identity */
+  --color-ink: #0d1436;        /* deep blue-ink — text + dark sections */
+  --color-onyx-900: #0d1436;
+  --color-onyx-800: #16205a;
+  --color-onyx-700: #1e2a6e;
+  --color-onyx-600: #2a3888;
+
+  --color-paper: #f4f6ff;      /* ice-blue page background */
+  --color-cream: #ffffff;      /* card surface */
+  --color-surface: #ffffff;
+
+  /* "ember" slot now carries the royal-blue accent (primary/CTA) */
+  --color-ember: #1d3fcc;
+  --color-ember-600: #163398;
+  --color-ember-50: #e7ebff;
+
+  /* jersey yellow — the stripe / pop accent */
+  --color-yellow: #ffd21a;
+  --color-yellow-deep: #f0c000;
+  --color-gold: #f0c000;       /* podium / personal best */
+
+  /* Neutrals */
+  --color-greige: #6b7280;     /* secondary text */
+  --color-greige-400: #9aa1b4;
+  --color-line: #e6e9f5;       /* hairline borders on light */
+  --color-line-dark: #26307a;  /* hairline borders on blue */
+
+  /* Rectangular corners — override Tailwind radius scale */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 5px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
+
+  /* Typography */
+  --font-display: var(--font-jakarta);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-script: var(--font-script);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: #fff;
+}
+
+/* Eyebrow / kicker — friendly (not mono) */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---- Glossy molded surfaces ---- */
+.gloss-blue {
+  background: linear-gradient(180deg, #3350e6 0%, #1d3fcc 55%, #163398 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 8px 16px -6px rgba(19, 38, 143, 0.5);
+}
+.gloss-blue:hover {
+  background: linear-gradient(180deg, #3f5cf0 0%, #2545d6 55%, #183aa8 100%);
+}
+.gloss-yellow {
+  background: linear-gradient(180deg, #ffe15a 0%, #ffd21a 55%, #f0c000 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 8px 16px -6px rgba(240, 192, 0, 0.5);
+}
+.gloss-yellow:hover {
+  background: linear-gradient(180deg, #ffe872 0%, #ffd935 55%, #f7c800 100%);
+}
+.gloss-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7ff 100%);
+  box-shadow: 0 16px 34px -18px rgba(29, 63, 204, 0.28),
+    inset 0 1px 0 #ffffff;
+}
+.gloss-dark {
+  background: linear-gradient(180deg, #1a2668 0%, #101a4d 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Jersey yellow stripe motif */
+.stripe-yellow {
+  background: linear-gradient(180deg, #ffe15a, #f0c000);
 }
