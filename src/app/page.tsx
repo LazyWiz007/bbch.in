@@ -10,6 +10,7 @@ import { TypeBadge } from "@/components/ui/badge";
 import { getRecentEvents, getStats, events } from "@/lib/data";
 import { getTeamStandings } from "@/lib/team-standings";
 import { TeamStandings } from "@/components/team-standings";
+import { ProtectedGalleryGrid } from "@/components/protected-gallery-grid";
 import {
   getUpcomingEvents,
   dateParts,
@@ -200,29 +201,10 @@ export default function Home() {
           <SectionHeading
             eyebrow="On the road"
             title="Race gallery"
-            action={{ href: "/gallery", label: "View gallery" }}
             onDark
           />
         </Container>
-        <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          {gallery.slice(0, 8).map((photo, i) => (
-            <Link
-              key={photo.src}
-              href="/gallery"
-              className="group relative aspect-square overflow-hidden bg-onyx-800"
-            >
-              <Image
-                src={photo.src}
-                alt={`BBCh race photo ${i + 1}`}
-                fill
-                unoptimized
-                sizes="(max-width: 640px) 50vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 stripe-yellow opacity-0 transition-opacity group-hover:opacity-100" />
-            </Link>
-          ))}
-        </div>
+        <ProtectedGalleryGrid />
       </section>
 
       {/* SOCIAL FEED */}

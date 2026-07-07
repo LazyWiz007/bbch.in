@@ -13,7 +13,6 @@ const links = [
   { href: "/athletes", label: "Athletes" },
   { href: "/attendee-list", label: "Attendees" },
   { href: "/about", label: "About" },
-  { href: "/gallery", label: "Gallery" },
 ];
 
 export function Navbar() {
