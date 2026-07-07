@@ -23,7 +23,7 @@ const UPCOMING: UpcomingEvent[] = [
     location: "Bengaluru, Karnataka",
     discipline: "Road Race",
     registrationUrl: "https://konfhub.com/bbch26-race06",
-    cover: disciplineCover("Road Race") ?? "/covers/road-race.jpg",
+    cover: "/covers/bbch-classic-2026.png",
   },
 ];
 
