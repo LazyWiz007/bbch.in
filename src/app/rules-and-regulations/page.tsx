@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/page-header";
+import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Rules & Regulations",
   description:
-    "BBCh Release and Waiver of Liability — the assumption of risk, indemnity and media consent agreement every rider agrees to when registering for a Bangalore Bicycle Championships event.",
+    "The full BBCh rulebook — rider categories, points, penalties and discipline-specific rules — plus the Release and Waiver of Liability every rider agrees to when registering for a Bangalore Bicycle Championships event.",
 };
 
 export default function RulesAndRegulationsPage() {
@@ -14,11 +15,35 @@ export default function RulesAndRegulationsPage() {
       <PageHeader
         eyebrow="Before you race"
         title="Rules & Regulations"
-        subtitle="The Release and Waiver of Liability that every rider agrees to when registering for a BBCh event."
+        subtitle="The official BBCh rulebook, and the Release and Waiver of Liability that every rider agrees to when registering for a BBCh event."
       />
 
       <Container className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl">
+          {/* Full rulebook download */}
+          <div className="gloss-card mb-10 flex flex-col items-start gap-5 rounded-xl border border-line p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div>
+              <p className="eyebrow text-ember">Official rulebook</p>
+              <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+                BBCh Rules and Regulations
+              </h2>
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-greige">
+                Rider categories, points classification, teams, entry rules,
+                bicycles &amp; uniform, conduct, and the discipline-specific
+                rules for Road Race, Criterium, ITT and TTT — plus the full
+                table of penalties.
+              </p>
+            </div>
+            <ButtonLink
+              href="/documents/BBCh-Rules-and-Regulations.docx"
+              external
+              variant="primary"
+              className="shrink-0"
+            >
+              Download rulebook (.docx)
+            </ButtonLink>
+          </div>
+
           <div className="gloss-card rounded-xl border border-line p-6 sm:p-10">
             <p className="eyebrow text-ember">Legal agreement</p>
             <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">

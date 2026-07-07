@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
@@ -35,6 +36,11 @@ export const metadata: Metadata = {
   },
   description:
     "The home of the Bangalore Bicycle Championships — road races, MTB and time trials. Find events, results and rider profiles across every season.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -51,15 +57,15 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        {/* Facebook SDK — required for the Page Plugin feed. Loaded after the
+            page is interactive so it can't mutate #fb-root before React
+            finishes hydrating (that race caused a hydration-mismatch error). */}
+        <Script
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+          src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v20.0"
+        />
       </body>
-      {/* Facebook SDK — required for the Page Plugin feed */}
-      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-      <script
-        async
-        defer
-        crossOrigin="anonymous"
-        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v20.0"
-      />
     </html>
   );
 }
