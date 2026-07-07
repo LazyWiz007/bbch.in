@@ -11,6 +11,7 @@ import { getRecentEvents, getStats, events } from "@/lib/data";
 import { getTeamStandings } from "@/lib/team-standings";
 import { TeamStandings } from "@/components/team-standings";
 import { ProtectedGalleryGrid } from "@/components/protected-gallery-grid";
+import { FacebookFeed } from "@/components/facebook-feed";
 import {
   getUpcomingEvents,
   dateParts,
@@ -237,21 +238,7 @@ export default function Home() {
                   Visit page →
                 </a>
               </div>
-              {/* fb-root is needed once per page for the SDK; we place it here */}
-              <div id="fb-root" />
-              <div className="overflow-hidden rounded-xl border border-line">
-                <div
-                  className="fb-page"
-                  data-href="https://www.facebook.com/BangaloreBicycleChampionships/"
-                  data-tabs="timeline"
-                  data-width="500"
-                  data-height="500"
-                  data-small-header="true"
-                  data-adapt-container-width="true"
-                  data-hide-cover="false"
-                  data-show-facepile="false"
-                />
-              </div>
+              <FacebookFeed />
             </div>
 
             {/* Instagram follow CTA */}
