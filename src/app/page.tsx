@@ -72,9 +72,8 @@ export default function Home() {
           </div>
 
           {nextUp && (
-            <a
-              href={nextUp.registrationUrl || "/events"}
-              {...(nextUp.registrationUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            <Link
+              href={nextUp.detailsUrl || nextUp.registrationUrl || "/events"}
               className="gloss-dark group mt-14 flex flex-col gap-4 rounded-xl border border-line-dark p-5 transition-colors hover:border-yellow/50 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-6"
             >
               <div className="flex items-center gap-5">
@@ -92,9 +91,9 @@ export default function Home() {
                 </div>
               </div>
               <span className="inline-flex items-center gap-1 text-sm font-semibold text-white transition-colors group-hover:text-yellow">
-                Register now <span aria-hidden="true">→</span>
+                View details <span aria-hidden="true">→</span>
               </span>
-            </a>
+            </Link>
           )}
         </Container>
         <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-2.5" />
@@ -356,7 +355,7 @@ function UpcomingCard({ event }: { event: UpcomingEvent }) {
   const d = dateParts(event.date);
   return (
     <div className="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-16px_rgba(11,11,13,0.25)]">
-      <div className="relative aspect-[16/9] overflow-hidden bg-ink">
+      <Link href={event.detailsUrl || event.registrationUrl || "/events"} className="relative block aspect-[16/9] overflow-hidden bg-ink">
         <Image
           src={event.cover}
           alt={event.discipline}
@@ -373,16 +372,22 @@ function UpcomingCard({ event }: { event: UpcomingEvent }) {
         <div className="absolute right-4 top-4">
           <TypeBadge type={event.discipline} className="bg-paper/90 backdrop-blur" />
         </div>
-      </div>
+      </Link>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-lg font-medium leading-snug tracking-tight text-ink">
-          {event.name}
-        </h3>
+        <Link href={event.detailsUrl || event.registrationUrl || "/events"}>
+          <h3 className="font-display text-lg font-medium leading-snug tracking-tight text-ink hover:text-ember">
+            {event.name}
+          </h3>
+        </Link>
         <p className="mt-1.5 text-sm text-greige">
           {formatDate(event.date)} · {event.location}
         </p>
         <div className="mt-5 flex flex-1 items-end">
-          {event.registrationUrl ? (
+          {event.detailsUrl ? (
+            <ButtonLink href={event.detailsUrl} size="sm" className="w-full">
+              View details &amp; register
+            </ButtonLink>
+          ) : event.registrationUrl ? (
             <ButtonLink href={event.registrationUrl} external size="sm" className="w-full">
               Register now
             </ButtonLink>
@@ -398,69 +403,77 @@ function UpcomingCard({ event }: { event: UpcomingEvent }) {
 function FeaturedUpcomingCard({ event }: { event: UpcomingEvent }) {
   const d = dateParts(event.date);
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-yellow/50 lg:flex-row">
-      {/* Image container */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-ink lg:aspect-auto lg:h-[380px] lg:w-[55%]">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-yellow/50 sm:flex-row">
+
+      {/* Poster — fixed width column, image sizes naturally with no dark gaps */}
+      <div className="relative w-full shrink-0 overflow-hidden sm:w-80 md:w-96 lg:w-[420px]">
         <Image
           src={event.cover}
           alt={event.discipline}
-          fill
+          width={1080}
+          height={1080}
           unoptimized
           priority
-          sizes="(max-width: 1024px) 100vw, 55vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, 288px"
+          className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-ink/15" />
-        
         {/* Date badge */}
-        <div className="absolute left-6 top-6 flex flex-col items-center rounded-xl bg-ember px-4.5 py-3 text-white shadow-lg">
-          <span className="font-display text-3xl font-extrabold leading-none">{d.day}</span>
-          <span className="mt-1 font-mono text-[0.68rem] font-bold tracking-widest">{d.month}</span>
+        <div className="absolute left-4 top-4 flex flex-col items-center rounded-lg bg-ember px-3 py-2 text-white shadow-lg">
+          <span className="font-display text-2xl font-extrabold leading-none">{d.day}</span>
+          <span className="mt-0.5 font-mono text-[0.6rem] font-bold tracking-widest">{d.month}</span>
         </div>
-        
         {/* Category badge */}
-        <div className="absolute right-6 top-6">
-          <TypeBadge type={event.discipline} className="bg-paper/95 px-3 py-1 text-sm font-semibold shadow-md backdrop-blur-sm" />
+        <div className="absolute right-4 top-4">
+          <TypeBadge type={event.discipline} className="bg-paper/95 px-2.5 py-1 text-xs font-semibold shadow-md backdrop-blur-sm" />
         </div>
       </div>
 
-      {/* Content container */}
-      <div className="flex flex-1 flex-col justify-between p-6 sm:p-8 lg:p-10">
+      {/* Content */}
+      <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
         <div>
           <div className="flex items-center gap-2">
             <span className="eyebrow text-ember">Upcoming Event</span>
             <span className="h-1.5 w-1.5 rounded-full bg-ember/30" />
             <span className="text-sm font-semibold text-greige">{formatDate(event.date)}</span>
           </div>
-          <h3 className="mt-4 font-display text-2xl font-black leading-tight text-ink sm:text-3xl lg:text-4xl">
+          <h3 className="mt-3 font-display text-2xl font-black leading-tight text-ink sm:text-3xl">
             {event.name}
           </h3>
-          <p className="mt-3 text-base text-greige flex items-center gap-1.5">
-            <svg className="h-5 w-5 text-greige-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <p className="mt-2 flex items-center gap-1.5 text-sm text-greige">
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             {event.location}
           </p>
         </div>
-
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap gap-3">
+          {event.detailsUrl && (
+            <ButtonLink
+              href={event.detailsUrl}
+              variant="outline"
+              size="md"
+              className="px-8 text-base font-bold h-14 active:scale-[0.98] transition-transform"
+            >
+              View details
+            </ButtonLink>
+          )}
           {event.registrationUrl ? (
             <ButtonLink
-              href={event.registrationUrl}
-              external
+              href={event.detailsUrl ? `${event.detailsUrl}#register` : event.registrationUrl}
+              external={!event.detailsUrl}
               variant="yellow"
               size="md"
-              className="w-full sm:w-auto px-12 text-lg font-bold h-14 active:scale-[0.98] transition-transform"
+              className="px-10 text-base font-bold h-14 active:scale-[0.98] transition-transform"
             >
-              Register for this race →
+              Register now →
             </ButtonLink>
-          ) : (
+          ) : !event.detailsUrl ? (
             <div className="inline-flex items-center gap-2 rounded-lg bg-paper px-4 py-3 text-sm font-semibold text-greige border border-line">
               <span className="h-2 w-2 rounded-full bg-yellow" />
               Registration opening soon
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

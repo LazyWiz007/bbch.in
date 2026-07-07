@@ -9,6 +9,8 @@ export interface UpcomingEvent {
   discipline: string;
   registrationUrl?: string;
   cover: string;
+  /** Internal details page, if one exists on this site. */
+  detailsUrl?: string;
 }
 
 /*
@@ -24,6 +26,7 @@ const UPCOMING: UpcomingEvent[] = [
     discipline: "Road Race",
     registrationUrl: "https://konfhub.com/bbch26-race06",
     cover: "/covers/bbch-classic-2026.png",
+    detailsUrl: "/events/bbch26-race06",
   },
 ];
 
