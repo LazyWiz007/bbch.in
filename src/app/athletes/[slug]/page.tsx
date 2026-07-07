@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { ResultsTable } from "@/components/results-table";
@@ -57,9 +58,21 @@ export default async function AthleteProfilePage({
             ← All athletes
           </Link>
           <div className="mt-6 flex items-center gap-5">
-            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-onyx-700 font-display text-2xl font-medium text-paper">
-              {initials(athlete.name)}
-            </span>
+            {athlete.imageUrl ? (
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-line-dark bg-onyx-700">
+                <Image
+                  src={athlete.imageUrl}
+                  alt={athlete.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-onyx-700 font-display text-2xl font-medium text-paper">
+                {initials(athlete.name)}
+              </span>
+            )}
             <div>
               <h1 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">
                 {athlete.name}

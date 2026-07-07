@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { AthleteSummary } from "@/lib/data";
 
 const PAGE = 60;
@@ -55,9 +56,21 @@ export function AthletesExplorer({ athletes }: { athletes: AthleteSummary[] }) {
             href={`/athletes/${a.slug}`}
             className="group flex items-center gap-4 rounded-xl border border-line bg-cream p-5 transition-all hover:-translate-y-0.5 hover:border-ink/20"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink font-display text-sm font-medium text-paper">
-              {initials(a.name)}
-            </span>
+            {a.imageUrl ? (
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-line bg-ink">
+                <Image
+                  src={a.imageUrl}
+                  alt={a.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink font-display text-sm font-medium text-paper">
+                {initials(a.name)}
+              </span>
+            )}
             <div className="min-w-0 flex-1">
               <p className="truncate font-medium text-ink group-hover:text-ember">{a.name}</p>
               <p className="truncate text-sm text-greige">{a.team ?? "Independent"}</p>

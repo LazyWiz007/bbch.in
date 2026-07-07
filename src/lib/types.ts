@@ -34,6 +34,7 @@ export interface Athlete {
   gender: Gender;
   team?: string | null;
   aliases?: string[];
+  imageUrl?: string;
 }
 
 export interface Result {

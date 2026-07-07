@@ -63,15 +63,15 @@ export function RankChart({ rows }: { rows: ResultRow[] }) {
 
       {rows.map((r, i) => (
         <circle
-          key={`${r.eventId}-${r.category}`}
+          key={`${r.eventId}-${r.category}-${i}`}
           cx={x(i)} cy={y(r.rank ?? 1)} r={r.rank === 1 ? 6 : 4.5}
           fill={r.rank === 1 ? "#f0c000" : "#0d1436"} stroke="#ffffff" strokeWidth="2"
         />
       ))}
 
-      {labels.map((l) => (
+      {labels.map((l, i) => (
         <text
-          key={l.year}
+          key={`${l.year}-${i}`}
           x={Math.min(Math.max(l.x, padX + 14), w - padX - 14)}
           y={h - 6}
           textAnchor="middle"

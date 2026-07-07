@@ -210,6 +210,7 @@ export interface AthleteSummary {
   races: number;
   wins: number;
   bestRank: number | null;
+  imageUrl?: string;
 }
 
 export function getAthleteSummaries(): AthleteSummary[] {
@@ -226,6 +227,7 @@ export function getAthleteSummaries(): AthleteSummary[] {
         races: rows.length,
         wins: ranks.filter((r) => r === 1).length,
         bestRank: ranks.length ? Math.min(...ranks) : null,
+        imageUrl: a.imageUrl,
       };
     })
     .sort((a, b) => b.races - a.races || a.name.localeCompare(b.name));
