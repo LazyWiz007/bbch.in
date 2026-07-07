@@ -7,9 +7,10 @@ import { EventCard } from "@/components/event-card";
 import { partners } from "@/lib/partners";
 import { gallery } from "@/lib/gallery";
 import { TypeBadge } from "@/components/ui/badge";
-import { getRecentEvents, getStats, events } from "@/lib/data";
+import { getRecentEvents, getStats, events, getTopAthletes } from "@/lib/data";
 import { getTeamStandings } from "@/lib/team-standings";
 import { TeamStandings } from "@/components/team-standings";
+import { TopAthletesPodium } from "@/components/top-athletes-podium";
 import { ProtectedGalleryGrid } from "@/components/protected-gallery-grid";
 import { FacebookFeed } from "@/components/facebook-feed";
 import {
@@ -26,6 +27,9 @@ export default function Home() {
   const nextUp = upcoming[0];
   const latest = events[0];
   const teamStandings = getTeamStandings().slice(0, 8);
+  const maxYear = events.length > 0 ? Math.max(...events.map((e) => e.year)) : new Date().getFullYear();
+  const topAthletesAllTime = getTopAthletes();
+  const topAthletesThisSeason = getTopAthletes(maxYear);
 
   return (
     <>
@@ -134,10 +138,28 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* TEAM CHAMPIONSHIP */}
+      {/* TOP ATHLETES & TEAM CHAMPIONSHIP */}
       {teamStandings.length > 0 && (
         <section className="border-b border-line bg-paper py-16 sm:py-20">
           <Container>
+            {/* TOP ATHLETES */}
+            <div className="mb-16 pb-16 border-b border-line">
+              <SectionHeading
+                eyebrow="Rider standings"
+                title="Top athletes"
+                action={{ href: "/athletes", label: "All athletes" }}
+              />
+              <p className="mt-3 max-w-xl text-sm text-greige mb-12">
+                The most dominant riders based on cumulative points. Top 3 riders showcased for this season and all time.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
+                <TopAthletesPodium athletes={topAthletesThisSeason} title="This season" />
+                <TopAthletesPodium athletes={topAthletesAllTime} title="All time" />
+              </div>
+            </div>
+
+            {/* TEAM CHAMPIONSHIP */}
             <SectionHeading
               eyebrow="Team championship"
               title="All-time team standings"

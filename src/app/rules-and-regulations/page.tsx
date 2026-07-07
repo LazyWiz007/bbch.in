@@ -44,6 +44,23 @@ export default function RulesAndRegulationsPage() {
             </ButtonLink>
           </div>
 
+          {/* Points & Ranking System */}
+          <div className="gloss-card mb-10 rounded-xl border border-line p-6 sm:p-10">
+            <p className="eyebrow text-ember">Athlete & Team Standings</p>
+            <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+              Points &amp; Ranking System
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-ink/80">
+              The BBCh ranking system recognizes the most dominant riders and teams based on cumulative points across races. The system applies to both the <strong>Top Athletes</strong> and <strong>Team Championship</strong> standings on our homepage.
+            </p>
+            <ul className="mt-4 list-disc pl-5 text-sm leading-relaxed text-ink/80 space-y-2">
+              <li>Points are awarded to the <strong>top 15 finishers</strong> in every category of every race.</li>
+              <li>The points scale is strictly descending: <strong>25 points for a win (1st place)</strong>, 20 for 2nd, 16 for 3rd, 13 for 4th, 11 for 5th, 10 for 6th, and so on, down to 1 point for 15th place.</li>
+              <li>For athletes, we calculate both <strong>This season</strong> rankings (points accumulated in the current year) and <strong>All-time</strong> rankings (cumulative points across every season on record from 2015 to present).</li>
+              <li>For teams, cumulative team points are calculated across every season on record. Riders with no team on record ("Independent") do not score for any team.</li>
+            </ul>
+          </div>
+
           <div className="gloss-card rounded-xl border border-line p-6 sm:p-10">
             <p className="eyebrow text-ember">Legal agreement</p>
             <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">

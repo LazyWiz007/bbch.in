@@ -232,3 +232,58 @@ export function getAthleteSummaries(): AthleteSummary[] {
     })
     .sort((a, b) => b.races - a.races || a.name.localeCompare(b.name));
 }
+
+const POINTS_BY_RANK = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+export interface AthleteStanding {
+  athleteId: string;
+  name: string;
+  slug: string;
+  team: string | null;
+  imageUrl?: string;
+  points: number;
+  wins: number;
+  podiums: number;
+}
+
+export function getTopAthletes(season?: number): AthleteStanding[] {
+  const byAthlete = new Map<
+    string,
+    { points: number; wins: number; podiums: number }
+  >();
+
+  for (const r of results) {
+    if (r.rank == null) continue;
+
+    if (season != null) {
+      const event = eventById.get(r.eventId);
+      if (!event || event.year !== season) continue;
+    }
+
+    const pts = r.rank <= POINTS_BY_RANK.length ? POINTS_BY_RANK[r.rank - 1] : 0;
+    
+    let entry = byAthlete.get(r.athleteId);
+    if (!entry) {
+      entry = { points: 0, wins: 0, podiums: 0 };
+      byAthlete.set(r.athleteId, entry);
+    }
+    
+    entry.points += pts;
+    if (r.rank === 1) entry.wins += 1;
+    if (r.rank <= 3) entry.podiums += 1;
+  }
+
+  return [...byAthlete.entries()]
+    .map(([athleteId, stats]) => {
+      const a = athleteById.get(athleteId)!;
+      return {
+        athleteId,
+        name: a.name,
+        slug: a.slug,
+        team: a.team ?? null,
+        imageUrl: a.imageUrl,
+        ...stats,
+      };
+    })
+    .sort((a, b) => b.points - a.points);
+}
