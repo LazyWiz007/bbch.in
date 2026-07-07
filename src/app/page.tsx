@@ -37,10 +37,10 @@ export default function Home() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[70%_center] opacity-60"
+            className="object-cover object-[70%_center] opacity-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1436] via-[#13268f]/85 to-[#1d3fcc]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1436] via-transparent to-[#0d1436]/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1436] via-[#13268f]/70 to-[#1d3fcc]/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1436]/90 via-transparent to-[#0d1436]/10" />
         </div>
         <Container className="relative py-20 sm:py-28 lg:py-32">
           <div className="max-w-3xl">
@@ -108,10 +108,16 @@ export default function Home() {
               title="Upcoming events"
               action={{ href: "/events", label: "All events" }}
             />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {upcoming.map((e) => (
-                <UpcomingCard key={e.id} event={e} />
-              ))}
+            <div className="mt-10">
+              {upcoming.length === 1 ? (
+                <FeaturedUpcomingCard event={upcoming[0]} />
+              ) : (
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {upcoming.map((e) => (
+                    <UpcomingCard key={e.id} event={e} />
+                  ))}
+                </div>
+              )}
             </div>
           </Container>
         </section>
@@ -219,6 +225,100 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SOCIAL FEED */}
+      <section className="border-b border-line bg-paper py-16 sm:py-20">
+        <Container>
+          <SectionHeading
+            eyebrow="Follow the action"
+            title="Latest from BBCh"
+          />
+          <p className="mt-3 max-w-xl text-sm text-greige">
+            Stay up to date with race updates, results, and community highlights straight from our social channels.
+          </p>
+
+          <div className="mt-10 grid gap-8 lg:grid-cols-2">
+            {/* Facebook Page Plugin */}
+            <div className="flex flex-col">
+              <div className="mb-4 flex items-center gap-2.5">
+                {/* Facebook icon */}
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1877f2]">
+                  <svg viewBox="0 0 24 24" fill="white" className="h-4 w-4" aria-hidden="true">
+                    <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.313 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+                  </svg>
+                </span>
+                <span className="font-display font-semibold text-ink">Facebook</span>
+                <a
+                  href="https://www.facebook.com/BangaloreBicycleChampionships/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-auto text-sm font-medium text-ember hover:underline"
+                >
+                  Visit page →
+                </a>
+              </div>
+              {/* fb-root is needed once per page for the SDK; we place it here */}
+              <div id="fb-root" />
+              <div className="overflow-hidden rounded-xl border border-line">
+                <div
+                  className="fb-page"
+                  data-href="https://www.facebook.com/BangaloreBicycleChampionships/"
+                  data-tabs="timeline"
+                  data-width="500"
+                  data-height="500"
+                  data-small-header="true"
+                  data-adapt-container-width="true"
+                  data-hide-cover="false"
+                  data-show-facepile="false"
+                />
+              </div>
+            </div>
+
+            {/* Instagram follow CTA */}
+            <div className="flex flex-col">
+              <div className="mb-4 flex items-center gap-2.5">
+                {/* Instagram icon */}
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]">
+                  <svg viewBox="0 0 24 24" fill="white" className="h-4 w-4" aria-hidden="true">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </span>
+                <span className="font-display font-semibold text-ink">Instagram</span>
+                <a
+                  href="https://www.instagram.com/bbchindia/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-auto text-sm font-medium text-ember hover:underline"
+                >
+                  Visit profile →
+                </a>
+              </div>
+              {/* Instagram CTA card */}
+              <a
+                href="https://www.instagram.com/bbchindia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-1 flex-col items-center justify-center gap-5 rounded-xl border border-line bg-gradient-to-br from-[#fdf0f8] via-white to-[#f0eaff] p-10 text-center transition-colors hover:border-[#ee2a7b]/30"
+              >
+                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] shadow-lg">
+                  <svg viewBox="0 0 24 24" fill="white" className="h-10 w-10" aria-hidden="true">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-display text-xl font-bold text-ink">@bbchindia</p>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-greige">
+                    Race day shots, behind-the-scenes moments and rider stories. Follow us on Instagram to stay in the loop.
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ee2a7b] to-[#6228d7] px-6 py-2.5 text-sm font-bold text-white transition-opacity group-hover:opacity-90">
+                  Follow on Instagram
+                </span>
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* PARTNERS */}
       <section className="border-y border-line bg-paper py-16">
         <Container>
@@ -306,6 +406,78 @@ function UpcomingCard({ event }: { event: UpcomingEvent }) {
             </ButtonLink>
           ) : (
             <span className="text-sm text-greige">Registration opening soon</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FeaturedUpcomingCard({ event }: { event: UpcomingEvent }) {
+  const d = dateParts(event.date);
+  return (
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-yellow/50 lg:flex-row">
+      {/* Image container */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-ink lg:aspect-auto lg:h-[380px] lg:w-[55%]">
+        <Image
+          src={event.cover}
+          alt={event.discipline}
+          fill
+          unoptimized
+          priority
+          sizes="(max-width: 1024px) 100vw, 55vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-ink/15" />
+        
+        {/* Date badge */}
+        <div className="absolute left-6 top-6 flex flex-col items-center rounded-xl bg-ember px-4.5 py-3 text-white shadow-lg">
+          <span className="font-display text-3xl font-extrabold leading-none">{d.day}</span>
+          <span className="mt-1 font-mono text-[0.68rem] font-bold tracking-widest">{d.month}</span>
+        </div>
+        
+        {/* Category badge */}
+        <div className="absolute right-6 top-6">
+          <TypeBadge type={event.discipline} className="bg-paper/95 px-3 py-1 text-sm font-semibold shadow-md backdrop-blur-sm" />
+        </div>
+      </div>
+
+      {/* Content container */}
+      <div className="flex flex-1 flex-col justify-between p-6 sm:p-8 lg:p-10">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="eyebrow text-ember">Upcoming Event</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-ember/30" />
+            <span className="text-sm font-semibold text-greige">{formatDate(event.date)}</span>
+          </div>
+          <h3 className="mt-4 font-display text-2xl font-black leading-tight text-ink sm:text-3xl lg:text-4xl">
+            {event.name}
+          </h3>
+          <p className="mt-3 text-base text-greige flex items-center gap-1.5">
+            <svg className="h-5 w-5 text-greige-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {event.location}
+          </p>
+        </div>
+
+        <div className="mt-8">
+          {event.registrationUrl ? (
+            <ButtonLink
+              href={event.registrationUrl}
+              external
+              variant="yellow"
+              size="md"
+              className="w-full sm:w-auto px-12 text-lg font-bold h-14 active:scale-[0.98] transition-transform"
+            >
+              Register for this race →
+            </ButtonLink>
+          ) : (
+            <div className="inline-flex items-center gap-2 rounded-lg bg-paper px-4 py-3 text-sm font-semibold text-greige border border-line">
+              <span className="h-2 w-2 rounded-full bg-yellow" />
+              Registration opening soon
+            </div>
           )}
         </div>
       </div>

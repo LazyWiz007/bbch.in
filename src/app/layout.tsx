@@ -52,6 +52,14 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
+      {/* Facebook SDK — required for the Page Plugin feed */}
+      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+      <script
+        async
+        defer
+        crossOrigin="anonymous"
+        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v20.0"
+      />
     </html>
   );
 }
