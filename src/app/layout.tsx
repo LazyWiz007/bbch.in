@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { IntroLoader } from "@/components/intro-loader";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -124,6 +125,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v20.0"
         />
+        <SpeedInsights />
       </body>
     </html>
   );
