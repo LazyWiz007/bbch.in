@@ -4,6 +4,7 @@ import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Caveat } from "next/font/goog
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { IntroLoader } from "@/components/intro-loader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,13 +30,70 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const SITE_URL = "https://bbch.in";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Bangalore Bicycle Championships",
-    template: "%s · BBCh",
+    default:
+      "Bangalore Bicycle Championships | India's Longest-Running Cycling Event",
+    template: "%s · Bangalore Bicycle Championships",
   },
   description:
-    "The home of the Bangalore Bicycle Championships — road races, MTB and time trials. Find events, results and rider profiles across every season.",
+    "Bangalore Bicycle Championships (BBCh) — India's longest-running competitive cycling event since 2009. Road races, MTB and time trials in Bengaluru, with a full archive of events, results and rider profiles.",
+  applicationName: "Bangalore Bicycle Championships",
+  keywords: [
+    "Bangalore Bicycle Championships",
+    "BBCh",
+    "cycling India",
+    "Bangalore cycling",
+    "Bengaluru cycling races",
+    "road race Bangalore",
+    "MTB India",
+    "mountain biking Bengaluru",
+    "time trial cycling",
+    "cycling events India",
+    "cycling results",
+    "Nandi Hills time trial",
+    "competitive cycling India",
+    "bike race Bangalore",
+    "cycling club Bengaluru",
+  ],
+  authors: [{ name: "Bangalore Bicycle Championships", url: SITE_URL }],
+  creator: "Bangalore Bicycle Championships",
+  publisher: "Bangalore Bicycle Championships",
+  category: "Sports",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: SITE_URL,
+    siteName: "Bangalore Bicycle Championships",
+    title:
+      "Bangalore Bicycle Championships | India's Longest-Running Cycling Event",
+    description:
+      "India's longest-running competitive cycling event since 2009 — road races, MTB and time trials in Bengaluru. Explore events, results and rider profiles.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Bangalore Bicycle Championships | India's Longest-Running Cycling Event",
+    description:
+      "India's longest-running competitive cycling event since 2009 — road races, MTB and time trials in Bengaluru.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -54,6 +112,7 @@ export default function RootLayout({
       className={`${inter.variable} ${jakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <IntroLoader />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

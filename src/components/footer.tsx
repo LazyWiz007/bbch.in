@@ -91,17 +91,26 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col justify-between gap-3 border-t border-line-dark pt-6 text-xs text-greige-400 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Bangalore Bicycle Championships. All rights reserved.</p>
-          <p>
-            Developed &amp; managed by{" "}
-            <a
-              href="https://webrook.in"
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
               className="text-paper/60 transition-colors hover:text-paper"
             >
-              webrook.in
-            </a>
-          </p>
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true" className="text-line-dark">·</span>
+            <p>
+              Developed &amp; managed by{" "}
+              <a
+                href="https://webrook.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-paper/60 transition-colors hover:text-paper"
+              >
+                webrook.in
+              </a>
+            </p>
+          </div>
         </div>
       </Container>
     </footer>
