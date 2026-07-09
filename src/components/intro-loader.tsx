@@ -46,7 +46,8 @@ export function IntroLoader() {
 
     // Some browsers need an explicit play() nudge for muted autoplay.
     videoRef.current?.play?.().catch(() => {
-      /* autoplay blocked — the safety timer below still dismisses the intro */
+      // autoplay blocked (e.g., iOS Low Power Mode) — skip immediately
+      setPhase("fading");
     });
 
     // Safety net: if "ended" never fires, dismiss anyway.
