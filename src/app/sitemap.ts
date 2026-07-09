@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }[] = [
     { path: "", priority: 1.0, changeFrequency: "weekly" },
     { path: "/events", priority: 0.9, changeFrequency: "weekly" },
-    { path: "/events/bbch26-race06", priority: 0.8, changeFrequency: "weekly" },
     { path: "/results", priority: 0.8, changeFrequency: "weekly" },
     { path: "/athletes", priority: 0.8, changeFrequency: "weekly" },
     { path: "/about", priority: 0.6, changeFrequency: "monthly" },
