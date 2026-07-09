@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/page-header";
 import { ButtonLink } from "@/components/ui/button";
@@ -59,6 +60,26 @@ export default function RulesAndRegulationsPage() {
               <li>For athletes, we calculate both <strong>This season</strong> rankings (points accumulated in the current year) and <strong>All-time</strong> rankings (cumulative points across every season on record from 2015 to present).</li>
               <li>For teams, cumulative team points are calculated across every season on record. Riders with no team on record ("Independent") do not score for any team.</li>
             </ul>
+          </div>
+
+          {/* Bib Attachment Guidance */}
+          <div className="gloss-card mb-10 rounded-xl border border-line p-6 sm:p-10">
+            <p className="eyebrow text-ember">Race Day Rules</p>
+            <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+              How to attach your bib
+            </h2>
+            <p className="mt-4 mb-8 text-sm leading-relaxed text-ink/80">
+              Proper bib placement is crucial for our race timing systems and photographers to accurately identify you during the race. Please ensure your bib is securely attached flat across the front of your handlebars using zip ties, fully visible from the front as shown below. <strong>Do not</strong> wrap the bib around tubes or place it sideways.
+            </p>
+            <div className="relative aspect-square sm:aspect-video w-full overflow-hidden rounded-lg border border-line bg-onyx-50">
+              <Image 
+                src="/brand/bib-attachment.jpeg" 
+                alt="Examples of correctly attached race bibs on handlebars" 
+                fill 
+                className="object-cover" 
+                unoptimized
+              />
+            </div>
           </div>
 
           <div className="gloss-card rounded-xl border border-line p-6 sm:p-10">
