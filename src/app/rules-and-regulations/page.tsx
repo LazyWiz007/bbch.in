@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/page-header";
 import { ButtonLink } from "@/components/ui/button";
+import { PDFViewer } from "@/components/pdf-viewer";
 
 export const metadata: Metadata = {
   title: "Rules & Regulations",
@@ -22,27 +23,47 @@ export default function RulesAndRegulationsPage() {
       <Container className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl">
           {/* Full rulebook download */}
-          <div className="gloss-card mb-10 flex flex-col items-start gap-5 rounded-xl border border-line p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div>
-              <p className="eyebrow text-ember">Official rulebook</p>
-              <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
-                BBCh Rules and Regulations
-              </h2>
-              <p className="mt-2 max-w-md text-sm leading-relaxed text-greige">
-                Rider categories, points classification, teams, entry rules,
-                bicycles &amp; uniform, conduct, and the discipline-specific
-                rules for Road Race, Criterium, ITT and TTT — plus the full
-                table of penalties.
-              </p>
+          <div className="gloss-card mb-10 rounded-xl border border-line p-4 sm:p-8">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="eyebrow text-ember">Official rulebook</p>
+                <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+                  BBCh Rules and Regulations
+                </h2>
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-greige">
+                  Rider categories, points classification, teams, entry rules,
+                  bicycles &amp; uniform, conduct, and the discipline-specific
+                  rules for Road Race, Criterium, ITT and TTT — plus the full
+                  table of penalties.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 w-full sm:w-auto sm:shrink-0">
+                <ButtonLink
+                  href="/documents/BBCh-Rules-and-Regulations.pdf"
+                  external
+                  variant="primary"
+                  className="w-full justify-center text-center sm:w-auto"
+                >
+                  Download PDF
+                </ButtonLink>
+                <ButtonLink
+                  href="/documents/BBCh-Rules-and-Regulations.docx"
+                  external
+                  variant="outline"
+                  className="w-full justify-center text-center sm:w-auto"
+                >
+                  Download Word (.docx)
+                </ButtonLink>
+              </div>
             </div>
-            <ButtonLink
-              href="/documents/BBCh-Rules-and-Regulations.docx"
-              external
-              variant="primary"
-              className="shrink-0"
-            >
-              Download rulebook (.docx)
-            </ButtonLink>
+
+            {/* Inline Scrollable PDF Viewer */}
+            <div className="mt-8 border-t border-line pt-8 -mx-4 sm:mx-0">
+              <h3 className="font-display text-lg font-extrabold tracking-tight text-ink mb-4 px-4 sm:px-0">
+                Online Rulebook Preview
+              </h3>
+              <PDFViewer url="/documents/BBCh-Rules-and-Regulations.pdf" />
+            </div>
           </div>
 
           {/* Points & Ranking System */}
