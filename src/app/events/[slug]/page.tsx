@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { TypeBadge } from "@/components/ui/badge";
-import { ResultsTable } from "@/components/results-table";
+import { EventResults } from "@/components/event-results";
 import { events, getEventBySlug, getResultsForEvent } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -35,6 +35,10 @@ export default async function EventDetailPage({
 
   const results = getResultsForEvent(event.id);
   const categories = event.categories;
+  // Only offer categories that actually have rows.
+  const categoriesWithResults = categories.filter((c) =>
+    results.some((r) => r.category === c)
+  );
 
   return (
     <>
@@ -70,28 +74,7 @@ export default async function EventDetailPage({
 
       <Container className="py-14">
         <h2 className="font-display text-2xl font-medium tracking-tight">Results</h2>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <a
-              key={c}
-              href={`#${encodeURIComponent(c)}`}
-              className="rounded-full border border-line bg-cream px-3 py-1 text-sm text-greige transition-colors hover:border-ink hover:text-ink"
-            >
-              {c}
-            </a>
-          ))}
-        </div>
-
-        {categories.map((cat) => {
-          const catRows = results.filter((r) => r.category === cat);
-          if (catRows.length === 0) return null;
-          return (
-            <div key={cat} id={cat} className="mt-10 scroll-mt-24">
-              <h3 className="mb-3 font-mono text-xs uppercase tracking-wider text-greige">{cat}</h3>
-              <ResultsTable rows={catRows} />
-            </div>
-          );
-        })}
+        <EventResults categories={categoriesWithResults} results={results} />
       </Container>
     </>
   );
