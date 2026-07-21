@@ -7,7 +7,9 @@ import { EventCard } from "@/components/event-card";
 import { partners } from "@/lib/partners";
 import { gallery } from "@/lib/gallery";
 import { TypeBadge } from "@/components/ui/badge";
-import { getRecentEvents, getStats, events, getTopAthletes } from "@/lib/data";
+import { getRecentEvents, getStats, events, getTopAthletes, getResultsForEvent } from "@/lib/data";
+import { formatResultTime } from "@/lib/utils";
+import { LatestRaceResults, type CategoryPodium } from "@/components/latest-race-results";
 import { getTeamStandings } from "@/lib/team-standings";
 import { TeamStandings } from "@/components/team-standings";
 import { TopAthletesPodium } from "@/components/top-athletes-podium";
@@ -26,6 +28,24 @@ export default function Home() {
   const upcoming = getUpcomingEvents();
   const nextUp = upcoming[0];
   const latest = events[0];
+
+  // Podium (top 3) per category for the most recent race.
+  const latestResults = latest ? getResultsForEvent(latest.id) : [];
+  const latestPodiums: CategoryPodium[] = (latest?.categories ?? [])
+    .map((category) => ({
+      category,
+      riders: latestResults
+        .filter((r) => r.category === category && r.rank != null)
+        .slice(0, 3)
+        .map((r) => ({
+          rank: r.rank as number,
+          name: r.athlete.name,
+          slug: r.athlete.slug,
+          team: r.athlete.team ?? null,
+          time: formatResultTime(r.timeSeconds, r.status),
+        })),
+    }))
+    .filter((p) => p.riders.length > 0);
   const teamStandings = getTeamStandings().slice(0, 8);
   const maxYear = events.length > 0 ? Math.max(...events.map((e) => e.year)) : new Date().getFullYear();
   const topAthletesAllTime = getTopAthletes();
@@ -123,6 +143,26 @@ export default function Home() {
                   ))}
                 </div>
               )}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* LATEST RACE PODIUM */}
+      {latest && latestPodiums.length > 0 && (
+        <section className="border-b border-line bg-paper py-16 sm:py-20">
+          <Container>
+            <SectionHeading
+              eyebrow="Latest results"
+              title={latest.name}
+              action={{ href: `/events/${latest.slug}`, label: "Full results" }}
+            />
+            <p className="mt-3 max-w-xl text-sm text-greige">
+              Podium finishers from the most recent race. Pick a category to see
+              its top three.
+            </p>
+            <div className="mt-8">
+              <LatestRaceResults podiums={latestPodiums} />
             </div>
           </Container>
         </section>

@@ -112,7 +112,14 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      {/* suppressHydrationWarning: browser extensions (Grammarly, password
+          managers) inject attributes like data-gr-ext-installed onto <body>
+          before React hydrates, which would otherwise log a hydration
+          mismatch. This only ignores attribute diffs on <body> itself. */}
+      <body
+        className="min-h-full flex flex-col bg-paper text-ink"
+        suppressHydrationWarning
+      >
         <IntroLoader />
         <Navbar />
         <main className="flex-1">{children}</main>
