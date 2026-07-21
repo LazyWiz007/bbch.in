@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { getEventBySlug, getResultsForEvent } from "@/lib/data";
+import { RaceResultsTabs } from "@/components/race-results-tabs";
 
 export const metadata: Metadata = {
   title: "Race #06 — Bangalore Classic Road Race · Results",
@@ -42,6 +43,16 @@ export default function Race06Page() {
     if (ai === -1) return 1;
     if (bi === -1) return -1;
     return ai - bi;
+  });
+
+  // Pre-build groups for the client tab component
+  const resultGroups = sortedCats.map((cat) => {
+    const rows = byCategory.get(cat)!;
+    return {
+      cat,
+      finishers: rows.filter((r) => r.rank != null),
+      dnf: rows.filter((r) => r.rank == null),
+    };
   });
 
   return (
@@ -125,84 +136,8 @@ export default function Race06Page() {
             </p>
           </div>
         ) : (
-          <div className="mt-8 space-y-10">
-            {sortedCats.map((cat) => {
-              const catResults = byCategory.get(cat)!;
-              const finishers = catResults.filter((r) => r.rank != null);
-              const dnf = catResults.filter((r) => r.rank == null);
-              return (
-                <div key={cat} className="overflow-hidden rounded-xl border border-line">
-                  <div className="flex items-center justify-between border-b border-line bg-ember-50 px-5 py-3">
-                    <h3 className="font-display text-sm font-bold uppercase tracking-wider text-ember-600">
-                      {cat}
-                    </h3>
-                    <span className="text-xs text-greige">
-                      {finishers.length} finisher{finishers.length !== 1 ? "s" : ""}
-                      {dnf.length > 0 ? ` · ${dnf.length} DNF/DNS` : ""}
-                    </span>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-line bg-paper/60 text-left text-[0.68rem] font-bold uppercase tracking-wider text-greige">
-                          <th className="px-4 py-2.5 w-12">Pos</th>
-                          <th className="px-4 py-2.5">Rider</th>
-                          <th className="px-4 py-2.5 hidden sm:table-cell">Team</th>
-                          <th className="px-4 py-2.5 text-right">Time</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {finishers.map((r, i) => (
-                          <tr
-                            key={`${r.athleteId}-${i}`}
-                            className={`border-b border-line/60 last:border-0 transition-colors hover:bg-cream/60 ${r.rank === 1 ? "bg-yellow/5" : ""}`}
-                          >
-                            <td className="px-4 py-3 font-display font-bold text-ink w-12">
-                              {r.rank === 1 ? (
-                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow font-extrabold text-ink text-xs">1</span>
-                              ) : r.rank === 2 ? (
-                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-greige/30 font-extrabold text-ink text-xs">2</span>
-                              ) : r.rank === 3 ? (
-                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-ember/20 font-extrabold text-ink text-xs">3</span>
-                              ) : (
-                                <span className="text-greige">{r.rank}</span>
-                              )}
-                            </td>
-                            <td className="px-4 py-3 font-medium text-ink">
-                              <Link href={`/athletes/${r.athlete.slug}`} className="hover:text-ember transition-colors">
-                                {r.athlete.name}
-                              </Link>
-                            </td>
-                            <td className="px-4 py-3 text-greige hidden sm:table-cell">
-                              {r.athlete.team ?? <span className="text-greige/50">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-right font-mono text-ink">
-                              {r.rawTime || <span className="text-greige/50">—</span>}
-                            </td>
-                          </tr>
-                        ))}
-                        {dnf.map((r, i) => (
-                          <tr key={`dnf-${r.athleteId}-${i}`} className="border-b border-line/60 last:border-0 opacity-50">
-                            <td className="px-4 py-3 w-12">
-                              <span className="text-xs font-bold text-greige">{r.status ?? "DNF"}</span>
-                            </td>
-                            <td className="px-4 py-3 text-greige">
-                              <Link href={`/athletes/${r.athlete.slug}`} className="hover:text-ember transition-colors">
-                                {r.athlete.name}
-                              </Link>
-                            </td>
-                            <td className="px-4 py-3 text-greige hidden sm:table-cell">
-                              {r.athlete.team ?? <span className="text-greige/50">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-right text-greige/60">—</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mt-8">
+            <RaceResultsTabs groups={resultGroups} />
           </div>
         )}
 
