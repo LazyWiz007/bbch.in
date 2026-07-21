@@ -67,9 +67,9 @@ export function ResultsTable({
       </div>
 
       <ul>
-        {rows.map((r) => (
+        {rows.map((r, i) => (
           <li
-            key={`${r.eventId}-${r.athleteId}-${r.category}`}
+            key={`${r.eventId}-${r.athleteId}-${r.category}-${i}`}
             className="border-b border-line last:border-0 transition-colors hover:bg-paper/60"
           >
             {/* Desktop */}

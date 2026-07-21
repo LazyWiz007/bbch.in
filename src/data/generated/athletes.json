@@ -7081,7 +7081,9 @@
 "name": "Renjith C",
 "gender": "M",
 "team": "RaceFit Coaching",
-"aliases": []
+"aliases": [
+"Renjith c"
+]
 },
 {
 "id": "ashish-thadani",
@@ -10962,8 +10964,7 @@
 "name": "Nandan Das",
 "gender": "M",
 "team": "Trailblazers Racing Team",
-"aliases": [],
-"imageUrl": "/brand/athlete pic/Nandan Das.png"
+"aliases": []
 },
 {
 "id": "star-narzary",
@@ -11280,7 +11281,9 @@
 "name": "Abhinav kc",
 "gender": "M",
 "team": null,
-"aliases": []
+"aliases": [
+"Abhinav Kc"
+]
 },
 {
 "id": "somesh-gopalshetty",
@@ -15573,7 +15576,7 @@
 "slug": "rahul-s-nadig",
 "name": "Rahul S Nadig",
 "gender": "M",
-"team": null,
+"team": "DECATHLON CYCLING",
 "aliases": []
 },
 {
@@ -15694,7 +15697,9 @@
 "name": "Vivas Manjunath",
 "gender": "M",
 "team": "SDRC",
-"aliases": []
+"aliases": [
+"Vivas manjunath"
+]
 },
 {
 "id": "aditya-iyer",
@@ -17634,8 +17639,7 @@
 "name": "Ahan Saran",
 "gender": "M",
 "team": "DELTA Team",
-"aliases": [],
-"imageUrl": "/brand/athlete pic/Ahan.jpeg"
+"aliases": []
 },
 {
 "id": "sathwik-rao",
@@ -17707,8 +17711,7 @@
 "name": "Prranav K",
 "gender": "M",
 "team": "DELTA Team",
-"aliases": [],
-"imageUrl": "/brand/athlete pic/pranav.jpeg"
+"aliases": []
 },
 {
 "id": "reyansh-prasad",
@@ -20827,7 +20830,7 @@
 "slug": "shashwat-singh",
 "name": "Shashwat Singh",
 "gender": "M",
-"team": "Maxwell Trevor Cycling Academy",
+"team": "Wattbombs Elite",
 "aliases": []
 },
 {
@@ -21055,7 +21058,7 @@
 "slug": "sankar-sivarajan",
 "name": "Sankar Sivarajan",
 "gender": "M",
-"team": "RACE FIT COACHING",
+"team": "RaceFit Coaching",
 "aliases": []
 },
 {
@@ -21265,7 +21268,7 @@
 "slug": "treesa-philip",
 "name": "Treesa Philip",
 "gender": "F",
-"team": "RACE FIT COACHING",
+"team": "RaceFit Coaching",
 "aliases": [
 "Treesa philip"
 ]
@@ -21302,7 +21305,7 @@
 "slug": "calvin-cyril-leon",
 "name": "Calvin Cyril Leon",
 "gender": "M",
-"team": null,
+"team": "Cyclologist Racing",
 "aliases": []
 },
 {
@@ -22358,7 +22361,7 @@
 "slug": "rishav-praharaj",
 "name": "Rishav Praharaj",
 "gender": "M",
-"team": null,
+"team": "Team BROS",
 "aliases": []
 },
 {
@@ -23346,7 +23349,7 @@
 "slug": "nihal-sateesh",
 "name": "Nihal Sateesh",
 "gender": "M",
-"team": null,
+"team": "Team ULTRA",
 "aliases": []
 },
 {
@@ -24811,7 +24814,9 @@
 "name": "Allen Savio Johnson",
 "gender": "M",
 "team": null,
-"aliases": []
+"aliases": [
+"Allen savio Johnson"
+]
 },
 {
 "id": "purav-kashi",
@@ -24923,6 +24928,622 @@
 "name": "Vishruth R",
 "gender": "M",
 "team": "Team BBCh",
+"aliases": []
+},
+{
+"id": "suryakanta-dalai",
+"slug": "suryakanta-dalai",
+"name": "Suryakanta Dalai",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "priyavansh-mahalik",
+"slug": "priyavansh-mahalik",
+"name": "Priyavansh Mahalik",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sam-manohar",
+"slug": "sam-manohar",
+"name": "Sam manohar",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sibabrata-pattnaik",
+"slug": "sibabrata-pattnaik",
+"name": "Sibabrata Pattnaik",
+"gender": "M",
+"team": "Team BROS",
+"aliases": []
+},
+{
+"id": "jothivenkatesh-mjv-m",
+"slug": "jothivenkatesh-mjv-m",
+"name": "Jothivenkatesh (MJV) M",
+"gender": "M",
+"team": "Spectrum Racing",
+"aliases": []
+},
+{
+"id": "pargat-singh",
+"slug": "pargat-singh",
+"name": "Pargat Singh",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "rushi-bhatt",
+"slug": "rushi-bhatt",
+"name": "Rushi Bhatt",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sreenandan-av",
+"slug": "sreenandan-av",
+"name": "Sreenandan AV",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "gopalakrishnan-perumal",
+"slug": "gopalakrishnan-perumal",
+"name": "Gopalakrishnan Perumal",
+"gender": "M",
+"team": "Aurovelo",
+"aliases": []
+},
+{
+"id": "rougon-alban",
+"slug": "rougon-alban",
+"name": "Rougon Alban",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "parameswaran-t-r",
+"slug": "parameswaran-t-r",
+"name": "Parameswaran T R",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "amith-toly",
+"slug": "amith-toly",
+"name": "Amith Toly",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "jayaprakash-narayanasamy",
+"slug": "jayaprakash-narayanasamy",
+"name": "Jayaprakash Narayanasamy",
+"gender": "M",
+"team": "Motley Crew",
+"aliases": []
+},
+{
+"id": "iqbal-vs",
+"slug": "iqbal-vs",
+"name": "Iqbal Vs",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "hunaif-p",
+"slug": "hunaif-p",
+"name": "Hunaif P",
+"gender": "M",
+"team": "WERKSTATT RACING",
+"aliases": []
+},
+{
+"id": "raj-tendulkar",
+"slug": "raj-tendulkar",
+"name": "Raj Tendulkar",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sooraj-r",
+"slug": "sooraj-r",
+"name": "Sooraj R",
+"gender": "M",
+"team": "Cyclologist Racing",
+"aliases": []
+},
+{
+"id": "jeffin-mathew",
+"slug": "jeffin-mathew",
+"name": "Jeffin Mathew",
+"gender": "M",
+"team": "Cyclologist Racing",
+"aliases": []
+},
+{
+"id": "fahd-sheriff",
+"slug": "fahd-sheriff",
+"name": "Fahd Sheriff",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "jinendra-sangave",
+"slug": "jinendra-sangave",
+"name": "Jinendra Sangave",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "arnab-chatterjee",
+"slug": "arnab-chatterjee",
+"name": "Arnab Chatterjee",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "gurumurthy-venkatakuppuswamy",
+"slug": "gurumurthy-venkatakuppuswamy",
+"name": "Gurumurthy Venkatakuppuswamy",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "mukesh-mude",
+"slug": "mukesh-mude",
+"name": "Mukesh Mude",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sanjiv-kaushik",
+"slug": "sanjiv-kaushik",
+"name": "Sanjiv Kaushik",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "kashish-thakran",
+"slug": "kashish-thakran",
+"name": "Kashish Thakran",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "anil",
+"slug": "anil",
+"name": "Anil",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "navaneeth-mg",
+"slug": "navaneeth-mg",
+"name": "Navaneeth MG",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "akshay-joshi",
+"slug": "akshay-joshi",
+"name": "Akshay Joshi",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "dhanu-prakash",
+"slug": "dhanu-prakash",
+"name": "Dhanu Prakash",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "puneet-kaul",
+"slug": "puneet-kaul",
+"name": "Puneet Kaul",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "ashwini-bhadoria",
+"slug": "ashwini-bhadoria",
+"name": "Ashwini Bhadoria",
+"gender": "M",
+"team": "ARISE Performance India",
+"aliases": []
+},
+{
+"id": "parashram-gore",
+"slug": "parashram-gore",
+"name": "Parashram gore",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "bansi-bhavesh",
+"slug": "bansi-bhavesh",
+"name": "Bansi Bhavesh",
+"gender": "M",
+"team": "SDRC",
+"aliases": []
+},
+{
+"id": "baradwaj-thota",
+"slug": "baradwaj-thota",
+"name": "Baradwaj Thota",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sajal-aggarwal",
+"slug": "sajal-aggarwal",
+"name": "Sajal Aggarwal",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "karthik-garikapati",
+"slug": "karthik-garikapati",
+"name": "Karthik Garikapati",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "vaibhav-mk",
+"slug": "vaibhav-mk",
+"name": "Vaibhav Mk",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sujith-kolya",
+"slug": "sujith-kolya",
+"name": "Sujith Kolya",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "aloysious-benoy",
+"slug": "aloysious-benoy",
+"name": "Aloysious Benoy",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "santosh-ram",
+"slug": "santosh-ram",
+"name": "Santosh Ram",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "richeek-awasthi",
+"slug": "richeek-awasthi",
+"name": "Richeek Awasthi",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "kush-patel",
+"slug": "kush-patel",
+"name": "Kush Patel",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "yajant-jagtap",
+"slug": "yajant-jagtap",
+"name": "Yajant Jagtap",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "nitin-srinivas",
+"slug": "nitin-srinivas",
+"name": "Nitin Srinivas",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "migom-doley",
+"slug": "migom-doley",
+"name": "Migom Doley",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sanchit-bansal",
+"slug": "sanchit-bansal",
+"name": "Sanchit Bansal",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "arpan-raval",
+"slug": "arpan-raval",
+"name": "Arpan Raval",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "vishal-chowdri",
+"slug": "vishal-chowdri",
+"name": "Vishal Chowdri",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "joe-paul",
+"slug": "joe-paul",
+"name": "Joe Paul",
+"gender": "M",
+"team": "DECATHLON CYCLING",
+"aliases": []
+},
+{
+"id": "sandeep-das",
+"slug": "sandeep-das",
+"name": "Sandeep Das",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "akhash-m",
+"slug": "akhash-m",
+"name": "Akhash M",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "za-dummy-05",
+"slug": "za-dummy-05",
+"name": "ZA Dummy 05",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "ankit-bhandari",
+"slug": "ankit-bhandari",
+"name": "Ankit Bhandari",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "anthony-paracka",
+"slug": "anthony-paracka",
+"name": "Anthony Paracka",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "ashish-goyal",
+"slug": "ashish-goyal",
+"name": "Ashish Goyal",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "benildus-vincent",
+"slug": "benildus-vincent",
+"name": "Benildus Vincent",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "david-anand",
+"slug": "david-anand",
+"name": "David Anand",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "diwakar-gr",
+"slug": "diwakar-gr",
+"name": "Diwakar GR",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "gautam-mishra",
+"slug": "gautam-mishra",
+"name": "Gautam Mishra",
+"gender": "M",
+"team": "DECATHLON CYCLING",
+"aliases": []
+},
+{
+"id": "guruviah-n",
+"slug": "guruviah-n",
+"name": "Guruviah N",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "jagannath-rv",
+"slug": "jagannath-rv",
+"name": "Jagannath RV",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "jeevan-b",
+"slug": "jeevan-b",
+"name": "Jeevan B",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "prachit-murthy",
+"slug": "prachit-murthy",
+"name": "Prachit Murthy",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "puneeth-kumar",
+"slug": "puneeth-kumar",
+"name": "Puneeth Kumar",
+"gender": "M",
+"team": "Zen Mountain",
+"aliases": []
+},
+{
+"id": "raghav-sharma",
+"slug": "raghav-sharma",
+"name": "Raghav Sharma",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "akshay-bapte",
+"slug": "akshay-bapte",
+"name": "Akshay Bapte",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "deepak-k",
+"slug": "deepak-k",
+"name": "Deepak K",
+"gender": "M",
+"team": "DECATHLON CYCLING",
+"aliases": []
+},
+{
+"id": "krishnaprasath-p",
+"slug": "krishnaprasath-p",
+"name": "KrishnaPrasath P",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "vamsi-krishna",
+"slug": "vamsi-krishna",
+"name": "Vamsi Krishna",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "vikas-sidana",
+"slug": "vikas-sidana",
+"name": "Vikas Sidana",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "nandini-gupta",
+"slug": "nandini-gupta",
+"name": "Nandini Gupta",
+"gender": "F",
+"team": null,
+"aliases": []
+},
+{
+"id": "sharanya-k-lathesh",
+"slug": "sharanya-k-lathesh",
+"name": "Sharanya K Lathesh",
+"gender": "F",
+"team": null,
+"aliases": []
+},
+{
+"id": "mahanya-lathesh",
+"slug": "mahanya-lathesh",
+"name": "Mahanya Lathesh",
+"gender": "F",
+"team": "Team ULTRA",
+"aliases": []
+},
+{
+"id": "melroy-sunwill-dsouza",
+"slug": "melroy-sunwill-dsouza",
+"name": "Melroy sunwill Dsouza",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "harshul-a",
+"slug": "harshul-a",
+"name": "Harshul A",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "aarya-vasani",
+"slug": "aarya-vasani",
+"name": "Aarya Vasani",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "nathan-chandrasekhar",
+"slug": "nathan-chandrasekhar",
+"name": "Nathan Chandrasekhar",
+"gender": "M",
+"team": null,
 "aliases": []
 }
 ]

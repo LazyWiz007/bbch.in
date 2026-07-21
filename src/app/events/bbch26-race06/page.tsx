@@ -3,14 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { getEventBySlug, getResultsForEvent } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Race #06 — Bangalore Classic Road Race",
+  title: "Race #06 — Bangalore Classic Road Race · Results",
   description:
-    "Race #06 of the BBCh 2026 season — Bangalore Classic Road Race. 19 July 2026, KIADB ITIR, Doddaballapura Road. Elite, Amateur, Women, U-18, Masters and Pioneer categories. Register on Konfhub.",
+    "Official results for BBCh 2026 Race #06 — Bangalore Classic Road Race, 19 July 2026, KIADB ITIR, Doddaballapura Road. Elite, Amateur, Women, U-18, Masters and Pioneer categories.",
 };
-
-const REG_URL = "https://konfhub.com/bbch26-race06";
 
 const categories = [
   { name: "Elite", distance: "161 km", start: "6:30 AM", fee: 999, cutoff: "12:30 PM (360 min)", note: "Open to all men racing irrespective of age — experienced/competitive riders." },
@@ -22,34 +21,29 @@ const categories = [
   { name: "Non-Road Bike", distance: "~41.4 km", start: "8:15 AM", fee: 699, cutoff: "Non-competitive", note: "Hybrid, MTB or foldie only. Fixie / single-speed not permitted." },
 ];
 
-const generalRules = [
-  {
-    q: "Where should I put my bib?",
-    a: "On the front handlebar of your bicycle. Bibs must be clearly displayed — altering, cutting, or placing unauthorised sponsor logos on your number will result in a fine and/or disqualification.",
-  },
-  {
-    q: "What conduct is expected on course?",
-    a: "No offensive or abusive language, no unsportsmanlike conduct, and full respect for volunteers and officials. You and your supporters are responsible for acting sensibly before, during and after the event.",
-  },
-  {
-    q: "Can I shortcut or alter the course?",
-    a: "No. You must follow the official route exactly — cutting the course results in disqualification. You may not move markers, tape or obstacles without consulting race officials.",
-  },
-  {
-    q: "What if I need to overtake or pull out?",
-    a: "Let faster riders pass safely without obstruction. If you DNF, you must notify the timing station or nearest marshal so all riders are accounted for.",
-  },
-  {
-    q: "Is mechanical support provided on course?",
-    a: "No — riders race self-supported: your own toolkit, flat-fixing, and towing if required. Emergency ambulance support is provided by Sparsh Hospital and Spectrum Physio.",
-  },
-  {
-    q: "Who do I contact on race day?",
-    a: "The race director's number is active only on race day: +91 98860 46777. The race referee has sole discretion on any on-course situation, and their ruling is final.",
-  },
-];
-
 export default function Race06Page() {
+  const event = getEventBySlug("2026-race-06-bangalore-classic-road-race");
+  const allResults = event ? getResultsForEvent(event.id) : [];
+
+  // Group results by category
+  const byCategory = new Map<string, typeof allResults>();
+  for (const r of allResults) {
+    const cat = r.category;
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat)!.push(r);
+  }
+
+  // Category display order
+  const CAT_ORDER = ["Elite", "Men Master (40+)", "Amateur", "Women", "U18", "Pioneer", "Non-Road Bike"];
+  const sortedCats = [...byCategory.keys()].sort((a, b) => {
+    const ai = CAT_ORDER.indexOf(a);
+    const bi = CAT_ORDER.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+
   return (
     <>
       {/* HERO */}
@@ -70,23 +64,24 @@ export default function Race06Page() {
                 <span>📅 Sunday, 19 July 2026</span>
                 <span>📍 KIADB ITIR, Doddaballapura Road, STRR</span>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <ButtonLink href="#register" variant="yellow">
-                  Register now
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
+                <span className="h-2 w-2 rounded-full bg-yellow" />
+                Race complete — results published
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <ButtonLink href="#results" variant="yellow">
+                  View results
                 </ButtonLink>
-                <ButtonLink href="#categories" variant="outlineLight">
-                  See categories &amp; fees
+                <ButtonLink href="/results" variant="outlineLight">
+                  Search all results
                 </ButtonLink>
               </div>
-              <p className="mt-4 text-xs text-white/60">
-                Registration closes Thursday, 16 July 2026 (midnight) · online only, no spot registration.
-              </p>
             </div>
 
             <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-xl shadow-2xl">
               <Image
                 src="/covers/bbch-classic-2026.png"
-                alt="Bangalore Classic Race #06 official poster — 19 July 2026, KIADB ITIR STRR. Distances: 81km (U-18, Women, Amateur, Non-Road Bike, Women Master), 162km (Elite, Men Master), 41km (Pioneer Category)."
+                alt="Bangalore Classic Race #06 official poster — 19 July 2026, KIADB ITIR STRR."
                 fill
                 unoptimized
                 sizes="(max-width: 1024px) 90vw, 420px"
@@ -101,52 +96,134 @@ export default function Race06Page() {
       {/* QUICK FACTS */}
       <section className="border-b border-line bg-paper py-10">
         <Container className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-          <Fact k="Reporting time" v="5:30 AM" sub="50 min before your category's start" />
+          <Fact k="Reporting time" v="5:30 AM" sub="50 min before category start" />
           <Fact k="Race start" v="6:30 AM" sub="Category-wise, staggered" />
-          <Fact k="Entry fee" v="₹699 – ₹999" sub="Excl. gateway charges" />
-          <Fact k="Registration closes" v="16 Jul, midnight" sub="Online only — no spot entry" />
+          <Fact k="Distance" v="41 – 161 km" sub="Depending on category" />
+          <Fact k="Venue" v="KIADB ITIR" sub="Doddaballapura Road, STRR" />
         </Container>
       </section>
 
-      {/* REGISTER — embedded Konfhub widget */}
-      <Container className="scroll-mt-20 py-16 sm:py-20" id="register">
-        <p className="eyebrow text-ember">Direct booking</p>
+      {/* RESULTS */}
+      <Container className="scroll-mt-20 py-16 sm:py-20" id="results">
+        <p className="eyebrow text-ember">Official results</p>
         <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Register
+          Race #06 results
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
-          Pick your category and check out securely — right here, powered by
-          Konfhub.
+          Bangalore Classic Road Race · 19 July 2026 · KIADB ITIR, Doddaballapura Road
         </p>
-        <div className="gloss-card mt-8 overflow-hidden rounded-xl border border-line p-1 sm:p-2">
-          <iframe
-            id="konfhub-widget"
-            title="Register for BBCh26 Race #06 | Bangalore Classic Road Race | 19-JUL-2026"
-            src="https://konfhub.com/widget/bbch26-race06?desc=true&secondaryBg=F4F6FF&ticketBg=F4F6FF&borderCl=E6E9F5&bg=FFFFFF&fontColor=0D1436&ticketCl=0D1436&btnColor=1D3FCC&fontFamily=Hind&borderRadius=8&widget_type=standard&tickets=104361%2C104362%2C104363%2C104364%2C104365%2C104366%2C104371&ticketId=104361%7C%3B104362%7C%3B104363%7C%3B104364%7C%3B104365%7C%3B104366%7C%3B104371%7C"
-            width="100%"
-            height="760"
-            loading="lazy"
-            className="rounded-lg"
-          />
+
+        {allResults.length === 0 ? (
+          <div className="mt-8 rounded-xl border border-line bg-cream p-10 text-center">
+            <p className="font-display text-lg font-bold text-ink">Results coming soon</p>
+            <p className="mt-2 text-sm text-greige">
+              Results are being processed. Check back shortly or{" "}
+              <Link href="/results" className="font-semibold text-ember hover:underline">
+                search the full archive
+              </Link>
+              .
+            </p>
+          </div>
+        ) : (
+          <div className="mt-8 space-y-10">
+            {sortedCats.map((cat) => {
+              const catResults = byCategory.get(cat)!;
+              const finishers = catResults.filter((r) => r.rank != null);
+              const dnf = catResults.filter((r) => r.rank == null);
+              return (
+                <div key={cat} className="overflow-hidden rounded-xl border border-line">
+                  <div className="flex items-center justify-between border-b border-line bg-ember-50 px-5 py-3">
+                    <h3 className="font-display text-sm font-bold uppercase tracking-wider text-ember-600">
+                      {cat}
+                    </h3>
+                    <span className="text-xs text-greige">
+                      {finishers.length} finisher{finishers.length !== 1 ? "s" : ""}
+                      {dnf.length > 0 ? ` · ${dnf.length} DNF/DNS` : ""}
+                    </span>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-line bg-paper/60 text-left text-[0.68rem] font-bold uppercase tracking-wider text-greige">
+                          <th className="px-4 py-2.5 w-12">Pos</th>
+                          <th className="px-4 py-2.5">Rider</th>
+                          <th className="px-4 py-2.5 hidden sm:table-cell">Team</th>
+                          <th className="px-4 py-2.5 text-right">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {finishers.map((r, i) => (
+                          <tr
+                            key={`${r.athleteId}-${i}`}
+                            className={`border-b border-line/60 last:border-0 transition-colors hover:bg-cream/60 ${r.rank === 1 ? "bg-yellow/5" : ""}`}
+                          >
+                            <td className="px-4 py-3 font-display font-bold text-ink w-12">
+                              {r.rank === 1 ? (
+                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow font-extrabold text-ink text-xs">1</span>
+                              ) : r.rank === 2 ? (
+                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-greige/30 font-extrabold text-ink text-xs">2</span>
+                              ) : r.rank === 3 ? (
+                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-ember/20 font-extrabold text-ink text-xs">3</span>
+                              ) : (
+                                <span className="text-greige">{r.rank}</span>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 font-medium text-ink">
+                              <Link href={`/athletes/${r.athlete.slug}`} className="hover:text-ember transition-colors">
+                                {r.athlete.name}
+                              </Link>
+                            </td>
+                            <td className="px-4 py-3 text-greige hidden sm:table-cell">
+                              {r.athlete.team ?? <span className="text-greige/50">—</span>}
+                            </td>
+                            <td className="px-4 py-3 text-right font-mono text-ink">
+                              {r.rawTime || <span className="text-greige/50">—</span>}
+                            </td>
+                          </tr>
+                        ))}
+                        {dnf.map((r, i) => (
+                          <tr key={`dnf-${r.athleteId}-${i}`} className="border-b border-line/60 last:border-0 opacity-50">
+                            <td className="px-4 py-3 w-12">
+                              <span className="text-xs font-bold text-greige">{r.status ?? "DNF"}</span>
+                            </td>
+                            <td className="px-4 py-3 text-greige">
+                              <Link href={`/athletes/${r.athlete.slug}`} className="hover:text-ember transition-colors">
+                                {r.athlete.name}
+                              </Link>
+                            </td>
+                            <td className="px-4 py-3 text-greige hidden sm:table-cell">
+                              {r.athlete.team ?? <span className="text-greige/50">—</span>}
+                            </td>
+                            <td className="px-4 py-3 text-right text-greige/60">—</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="mt-10 flex justify-center gap-3">
+          <ButtonLink href="/results" variant="primary">
+            Search all BBCh results
+          </ButtonLink>
+          <ButtonLink href="/events" variant="outline">
+            Back to all events
+          </ButtonLink>
         </div>
-        <p className="mt-4 text-center text-sm text-greige">
-          Widget not loading?{" "}
-          <a href={REG_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-ember hover:underline">
-            Open registration on Konfhub ↗
-          </a>
-        </p>
       </Container>
 
       {/* CATEGORIES & FEES */}
       <Container className="py-16 sm:py-20" id="categories">
-        <p className="eyebrow text-ember">Pick your race</p>
+        <p className="eyebrow text-ember">Race overview</p>
         <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Categories &amp; fees
+          Categories &amp; distances
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
-          Three distances, seven categories. Whoever races Elite or Men/Women
-          Master must stay in that category for the rest of the season — no
-          switching back to Amateur mid-season.
+          Three distances, seven categories raced on 19 July 2026.
         </p>
 
         <div className="mt-8 gloss-card overflow-hidden rounded-xl border border-line">
@@ -177,12 +254,6 @@ export default function Race06Page() {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="mt-6 flex justify-center">
-          <ButtonLink href={REG_URL} external variant="primary">
-            Register on Konfhub
-          </ButtonLink>
         </div>
       </Container>
 
@@ -249,28 +320,6 @@ export default function Race06Page() {
         </Container>
       </section>
 
-      {/* GENERAL RULES */}
-      <Container className="py-16 sm:py-20">
-        <p className="eyebrow text-ember">Read before race day</p>
-        <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Race-day rules
-        </h2>
-        <div className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
-          {generalRules.map((r) => (
-            <div key={r.q} className="gloss-card p-6">
-              <h3 className="font-display text-base font-bold text-ink">{r.q}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink/70">{r.a}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 text-sm text-greige">
-          Full rules and regulations:{" "}
-          <a href="https://bbch.in/rules-and-regulations/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ember hover:underline">
-            bbch.in/rules-and-regulations
-          </a>
-        </p>
-      </Container>
-
       {/* ORGANISER & DISCLAIMER */}
       <section className="gloss-dark py-16 text-white sm:py-20">
         <Container className="grid gap-10 lg:grid-cols-[1fr_1fr]">
@@ -305,14 +354,14 @@ export default function Race06Page() {
       {/* CTA */}
       <Container className="py-16 text-center">
         <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-          Ready to line up?
+          Find your result
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-greige">
-          Online registration only — no spot entries on race day.
+          Search by rider name, year, discipline or category across all BBCh seasons.
         </p>
         <div className="mt-6 flex justify-center gap-3">
-          <ButtonLink href={REG_URL} external variant="primary">
-            Register on Konfhub
+          <ButtonLink href="/results" variant="primary">
+            Search results
           </ButtonLink>
           <ButtonLink href="/events" variant="outline">
             Back to all events

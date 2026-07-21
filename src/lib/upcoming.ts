@@ -18,16 +18,8 @@ export interface UpcomingEvent {
   database instead. Keep only events that have actually been announced.
 */
 const UPCOMING: UpcomingEvent[] = [
-  {
-    id: "bbch26-race06",
-    name: "Race #06 — Bangalore Classic Road Race",
-    date: "2026-07-19",
-    location: "Bengaluru, Karnataka",
-    discipline: "Road Race",
-    registrationUrl: "https://konfhub.com/bbch26-race06",
-    cover: "/covers/bbch-classic-2026.png",
-    detailsUrl: "/events/bbch26-race06",
-  },
+  // Race #06 — Bangalore Classic Road Race (19 Jul 2026) has concluded.
+  // Add the next upcoming event here when announced.
 ];
 
 export function getUpcomingEvents(now = new Date()): UpcomingEvent[] {

@@ -144,12 +144,13 @@ export interface SearchRow {
 
 export function getSearchRows(): SearchRow[] {
   const rows: SearchRow[] = [];
+  let idx = 0;
   for (const r of results) {
     const a = athleteById.get(r.athleteId);
     const e = eventById.get(r.eventId);
     if (!a || !e) continue;
     rows.push({
-      id: `${r.eventId}-${r.athleteId}-${r.category}`,
+      id: `${r.eventId}-${r.athleteId}-${r.category}-${idx++}`,
       athleteName: a.name,
       athleteSlug: a.slug,
       gender: a.gender,

@@ -1355,5 +1355,22 @@
 ],
 "resultCount": 33,
 "resultsPublished": true
+},
+{
+"id": "2026-race-06-bangalore-classic-road-race",
+"year": 2026,
+"raceNo": 6,
+"name": "Race #06 - Bangalore Classic Road Race",
+"discipline": "Road Race",
+"series": "Bangalore Classic",
+"categories": [
+"Amateur",
+"Elite",
+"Men Master (40+)",
+"U18",
+"Women"
+],
+"resultCount": 175,
+"resultsPublished": true
 }
 ]
