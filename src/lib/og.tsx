@@ -16,7 +16,7 @@ export const OG_ALT =
 export async function renderOgImage() {
   const [hero, logo] = await Promise.all([
     readFile(join(process.cwd(), "public/images/hero-home.jpg")),
-    readFile(join(process.cwd(), "public/brand/logo-white.png")),
+    readFile(join(process.cwd(), "public/brand/BBCh25_WebsiteLogo.png")),
   ]);
   const heroSrc = `data:image/jpeg;base64,${hero.toString("base64")}`;
   const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
