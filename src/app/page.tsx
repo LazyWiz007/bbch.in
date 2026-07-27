@@ -121,7 +121,7 @@ export default function Home() {
             </Link>
           )}
         </Container>
-        <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-2.5" />
+        <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2.5" />
       </section>
 
       {/* UPCOMING */}
@@ -314,7 +314,7 @@ export default function Home() {
                 </span>
                 <span className="font-display font-semibold text-ink">Instagram</span>
                 <a
-                  href="https://www.instagram.com/bbchindia/"
+                  href="https://www.instagram.com/bangalorebicyclechampionships/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-auto text-sm font-medium text-ember hover:underline"
@@ -324,7 +324,7 @@ export default function Home() {
               </div>
               {/* Instagram CTA card */}
               <a
-                href="https://www.instagram.com/bbchindia/"
+                href="https://www.instagram.com/bangalorebicyclechampionships/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-1 flex-col items-center justify-center gap-5 rounded-xl border border-line bg-gradient-to-br from-[#fdf0f8] via-white to-[#f0eaff] p-10 text-center transition-colors hover:border-[#ee2a7b]/30"
@@ -335,7 +335,7 @@ export default function Home() {
                   </svg>
                 </span>
                 <div>
-                  <p className="font-display text-xl font-bold text-ink">@bbchindia</p>
+                  <p className="font-display text-xl font-bold text-ink">@bangalorebicyclechampionships</p>
                   <p className="mt-2 max-w-xs text-sm leading-relaxed text-greige">
                     Race day shots, behind-the-scenes moments and rider stories. Follow us on Instagram to stay in the loop.
                   </p>

@@ -6,32 +6,41 @@
   Look: bright, rectangular, glossy molded surfaces.
 */
 @theme {
-  /* Brand core — blue is the identity */
-  --color-ink: #0d1436;        /* deep blue-ink — text + dark sections */
-  --color-onyx-900: #0d1436;
-  --color-onyx-800: #16205a;
-  --color-onyx-700: #1e2a6e;
-  --color-onyx-600: #2a3888;
+  /* Brand core — indigo is the identity (the cyclist + bike in the logo) */
+  --color-ink: #241a63;        /* deep indigo — text + dark sections */
+  --color-onyx-900: #1a1550;
+  --color-onyx-800: #241a63;
+  --color-onyx-700: #332a86;
+  --color-onyx-600: #45399e;
 
-  --color-paper: #f4f6ff;      /* ice-blue page background */
-  --color-cream: #ffffff;      /* card surface */
-  --color-surface: #ffffff;
+  --color-paper: #ffffff;      /* white page background */
+  --color-cream: #f6f4fb;      /* faint indigo-tinted fills (inputs, soft panels) */
+  --color-surface: #ffffff;    /* card surface */
 
-  /* "ember" slot now carries the royal-blue accent (primary/CTA) */
-  --color-ember: #1d3fcc;
-  --color-ember-600: #163398;
-  --color-ember-50: #e7ebff;
+  /* "ember" slot carries the indigo accent (primary / links) */
+  --color-ember: #332a86;
+  --color-ember-600: #241a63;
+  --color-ember-50: #eeecf8;
 
-  /* jersey yellow — the stripe / pop accent */
-  --color-yellow: #ffd21a;
-  --color-yellow-deep: #f0c000;
-  --color-gold: #f0c000;       /* podium / personal best */
+  /* crimson — the logo's hot-pink trail; primary call-to-action colour */
+  --color-crimson: #e50963;
+  --color-crimson-deep: #c1074f;
+  --color-crimson-50: #fdeaf1;
+
+  /* amber — the logo's warm trail; highlights, eyebrows, 1st place */
+  --color-yellow: #f4a92b;
+  --color-yellow-deep: #e0932b;
+  --color-gold: #f4a92b;       /* podium / personal best */
+
+  /* orange + green — supporting spectrum accents */
+  --color-flame: #e0632e;
+  --color-leaf: #7cb342;
 
   /* Neutrals */
   --color-greige: #6b7280;     /* secondary text */
   --color-greige-400: #9aa1b4;
-  --color-line: #e6e9f5;       /* hairline borders on light */
-  --color-line-dark: #26307a;  /* hairline borders on blue */
+  --color-line: #e8e6f0;       /* hairline borders on light */
+  --color-line-dark: #3a2f7a;  /* hairline borders on indigo */
 
   /* Rectangular corners — override Tailwind radius scale */
   --radius-sm: 2px;
@@ -80,33 +89,39 @@ body {
 
 /* ---- Glossy molded surfaces ---- */
 .gloss-blue {
-  background: linear-gradient(180deg, #3350e6 0%, #1d3fcc 55%, #163398 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 8px 16px -6px rgba(19, 38, 143, 0.5);
+  background: linear-gradient(180deg, #45399e 0%, #332a86 55%, #241a63 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 8px 16px -6px rgba(36, 26, 99, 0.5);
 }
 .gloss-blue:hover {
-  background: linear-gradient(180deg, #3f5cf0 0%, #2545d6 55%, #183aa8 100%);
+  background: linear-gradient(180deg, #4f43ad 0%, #3b3197 55%, #2a2074 100%);
 }
+/* CTA — the logo's crimson trail */
 .gloss-yellow {
-  background: linear-gradient(180deg, #ffe15a 0%, #ffd21a 55%, #f0c000 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 8px 16px -6px rgba(240, 192, 0, 0.5);
+  background: linear-gradient(180deg, #f42d7c 0%, #e50963 55%, #c1074f 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 8px 16px -6px rgba(229, 9, 99, 0.45);
 }
 .gloss-yellow:hover {
-  background: linear-gradient(180deg, #ffe872 0%, #ffd935 55%, #f7c800 100%);
+  background: linear-gradient(180deg, #f8438b 0%, #ef1a70 55%, #d4085a 100%);
 }
 .gloss-card {
-  background: linear-gradient(180deg, #ffffff 0%, #f5f7ff 100%);
-  box-shadow: 0 16px 34px -18px rgba(29, 63, 204, 0.28),
+  background: linear-gradient(180deg, #ffffff 0%, #f7f5fc 100%);
+  box-shadow: 0 16px 34px -18px rgba(51, 42, 134, 0.22),
     inset 0 1px 0 #ffffff;
 }
 .gloss-dark {
-  background: linear-gradient(180deg, #1a2668 0%, #101a4d 100%);
+  background: linear-gradient(180deg, #2a2072 0%, #1a1550 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Jersey yellow stripe motif */
+/* Amber stripe motif — keeps dark text legible on date badges */
 .stripe-yellow {
-  background: linear-gradient(180deg, #ffe15a, #f0c000);
+  background: linear-gradient(180deg, #f7bd4d, #e0932b);
+}
+
+/* Warm trail — the logo's crimson→amber flow, for decorative bars */
+.stripe-warm {
+  background: linear-gradient(90deg, #e50963 0%, #e0632e 55%, #f4a92b 100%);
 }
 

@@ -71,7 +71,7 @@ export default function ContactPage() {
             <div className="rounded-xl border border-line bg-cream p-6">
               <h3 className="eyebrow text-greige">Follow along</h3>
               <div className="mt-4 flex flex-col gap-3 text-sm">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="font-medium text-ink hover:text-ember">
+                <a href="https://www.instagram.com/bangalorebicyclechampionships/" target="_blank" rel="noopener noreferrer" className="font-medium text-ink hover:text-ember">
                   Instagram →
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="font-medium text-ink hover:text-ember">

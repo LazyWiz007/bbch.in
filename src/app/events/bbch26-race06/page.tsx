@@ -90,7 +90,7 @@ export default function Race06Page() {
             </div>
           </div>
         </Container>
-        <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-2" />
+        <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
       </section>
 
       {/* QUICK FACTS */}

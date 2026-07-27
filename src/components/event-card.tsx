@@ -33,7 +33,7 @@ export function EventCard({ event }: { event: BbchEvent }) {
         <div className="absolute right-4 top-4">
           <TypeBadge type={event.discipline} className="border-transparent bg-white/90 text-ember-600 backdrop-blur" />
         </div>
-        <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-1.5" />
+        <div className="stripe-warm absolute bottom-0 left-0 right-0 h-1.5" />
       </div>
 
       <div className="flex flex-1 flex-col p-5">

@@ -93,7 +93,7 @@ export default function AboutPage() {
             </div>
           </div>
         </Container>
-        <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-2" />
+        <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
       </section>
 
       {/* FOUNDING STORY — asymmetric text + photo */}
@@ -239,7 +239,7 @@ export default function AboutPage() {
       {/* CTA */}
       <Container className="py-20">
         <div className="relative overflow-hidden rounded-2xl bg-ink px-6 py-14 text-center text-white sm:px-12 sm:py-20">
-          <div className="stripe-yellow absolute bottom-0 left-0 right-0 h-2" />
+          <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
           <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
             Come and race with us
           </h2>

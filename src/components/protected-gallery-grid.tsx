@@ -33,7 +33,7 @@ export function ProtectedGalleryGrid() {
             </span>
           </div>
           {/* Bottom stripe */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 stripe-yellow opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 stripe-warm opacity-0 transition-opacity group-hover:opacity-100" />
         </div>
       ))}
     </div>
