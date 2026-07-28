@@ -19,7 +19,16 @@ export interface UpcomingEvent {
 */
 const UPCOMING: UpcomingEvent[] = [
   // Race #06 — Bangalore Classic Road Race (19 Jul 2026) has concluded.
-  // Add the next upcoming event here when announced.
+  {
+    id: "bbch26-race07",
+    name: "Race #07 — MTB XC Race",
+    date: "2026-08-16",
+    location: "Avathi, Nandi Hill Road, Bengaluru",
+    discipline: "MTB (XC)",
+    registrationUrl: "https://www.explara.com/e/bbch26-race07/checkout",
+    cover: "/covers/mtb-xc.jpg",
+    detailsUrl: "/events/bbch26-race07",
+  },
 ];
 
 export function getUpcomingEvents(now = new Date()): UpcomingEvent[] {

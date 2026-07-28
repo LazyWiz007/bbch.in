@@ -19,9 +19,10 @@ export function Logo({
 }) {
   const src = "/brand/BBCh25_WebsiteLogo.png";
 
-  // Approximate aspect ratio — adjust if image dimensions differ
-  const ratio = 4;
-  const h = height ?? (full ? 56 : 28);
+  // True aspect ratio of BBCh25_WebsiteLogo.png (2000 × 593).
+  const ratio = 2000 / 593;
+  // Navbar is h-16 (64px), so 40px leaves comfortable breathing room.
+  const h = height ?? (full ? 56 : 40);
   const w = Math.round(h * ratio);
 
   return (
