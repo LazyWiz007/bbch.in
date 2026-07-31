@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }[] = [
     { path: "", priority: 1.0, changeFrequency: "weekly" },
     { path: "/events", priority: 0.9, changeFrequency: "weekly" },
+    { path: "/season-calendar", priority: 0.9, changeFrequency: "weekly" },
     // Upcoming race landing pages — high priority while registration is open.
     { path: "/events/bbch26-race07", priority: 0.9, changeFrequency: "daily" },
     { path: "/results", priority: 0.8, changeFrequency: "weekly" },

@@ -9,6 +9,7 @@ import { Logo } from "./logo";
 
 const links = [
   { href: "/events", label: "Events" },
+  { href: "/season-calendar", label: "Season 2026" },
   { href: "/results", label: "Results" },
   { href: "/athletes", label: "Athletes" },
   { href: "/attendee-list", label: "Attendees" },
