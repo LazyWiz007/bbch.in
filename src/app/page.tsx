@@ -450,38 +450,30 @@ function UpcomingCard({ event }: { event: UpcomingEvent }) {
 }
 
 function FeaturedUpcomingCard({ event }: { event: UpcomingEvent }) {
-  const d = dateParts(event.date);
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-yellow/50 sm:flex-row">
 
-      {/* Poster — fixed width column, image sizes naturally with no dark gaps */}
+      {/* Poster — official race banner, rendered uncropped with no overlays so
+          the artwork (logo, title, date) stays fully visible. */}
       <div className="relative w-full shrink-0 overflow-hidden sm:w-80 md:w-96 lg:w-[420px]">
         <Image
           src={event.cover}
-          alt={event.discipline}
-          width={1080}
-          height={1080}
+          alt={event.name}
+          width={1920}
+          height={1005}
           unoptimized
           priority
-          sizes="(max-width: 640px) 100vw, 288px"
+          sizes="(max-width: 640px) 100vw, 420px"
           className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
         />
-        {/* Date badge */}
-        <div className="absolute left-4 top-4 flex flex-col items-center rounded-lg bg-ember px-3 py-2 text-white shadow-lg">
-          <span className="font-display text-2xl font-extrabold leading-none">{d.day}</span>
-          <span className="mt-0.5 font-mono text-[0.6rem] font-bold tracking-widest">{d.month}</span>
-        </div>
-        {/* Category badge */}
-        <div className="absolute right-4 top-4">
-          <TypeBadge type={event.discipline} className="bg-paper/95 px-2.5 py-1 text-xs font-semibold shadow-md backdrop-blur-sm" />
-        </div>
       </div>
 
       {/* Content */}
       <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="eyebrow text-ember">Upcoming Event</span>
+            <TypeBadge type={event.discipline} className="px-2.5 py-1 text-xs font-semibold" />
             <span className="h-1.5 w-1.5 rounded-full bg-ember/30" />
             <span className="text-sm font-semibold text-greige">{formatDate(event.date)}</span>
           </div>

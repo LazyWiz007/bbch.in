@@ -49,28 +49,28 @@ export default function EventsPage() {
                     key={e.id}
                     className="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-16px_rgba(36,26,99,0.25)]"
                   >
-                    <Link href={href} className="relative block aspect-[16/9] overflow-hidden bg-ink">
+                    {/* Official banner — uncropped, no overlays, so the artwork
+                        (logo, race title, date) stays fully readable. */}
+                    <Link href={href} className="relative block overflow-hidden bg-ink">
                       <Image
                         src={e.cover}
                         alt={e.name}
-                        fill
+                        width={1920}
+                        height={1005}
                         unoptimized
                         sizes="(max-width: 640px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="block h-auto w-full transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
-                      <div className="absolute left-4 top-4 flex flex-col items-center rounded-lg bg-ember px-3 py-2 text-white">
-                        <span className="font-display text-2xl font-extrabold leading-none">
-                          {d.day}
-                        </span>
-                        <span className="font-mono text-[0.6rem] tracking-widest">{d.month}</span>
-                      </div>
-                      <div className="absolute right-4 top-4">
-                        <TypeBadge type={e.discipline} className="bg-paper/90 backdrop-blur" />
-                      </div>
                     </Link>
 
                     <div className="flex flex-1 flex-col p-5">
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <span className="inline-flex flex-col items-center rounded-md bg-ember px-2.5 py-1 leading-none text-white">
+                          <span className="font-display text-sm font-extrabold">{d.day}</span>
+                          <span className="font-mono text-[0.55rem] tracking-widest">{d.month}</span>
+                        </span>
+                        <TypeBadge type={e.discipline} />
+                      </div>
                       <Link href={href}>
                         <h3 className="font-display text-lg font-bold leading-snug tracking-tight text-ink group-hover:text-ember">
                           {e.name}

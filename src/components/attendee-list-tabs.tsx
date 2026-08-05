@@ -5,6 +5,13 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   {
+    id: "race-07",
+    label: "Race #07 (MTB XC)",
+    title: "BBCh26 Race #07 | MTB XC RACE | 16th August 2026",
+    iframeUrl: "https://in.explara.com/em/event/attendee/attendee-list-widget/eid/641462",
+    height: 650,
+  },
+  {
     id: "race-06",
     label: "Race #06 (Classic Road Race)",
     title: "BBCh26 Race #06 | CLASSIC ROAD RACE | 19th July 2026",
