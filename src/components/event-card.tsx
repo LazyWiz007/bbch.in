@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import type { BbchEvent } from "@/lib/types";
 import { TypeBadge } from "./ui/badge";
-import { disciplineCover } from "@/lib/covers";
+import { disciplineCover, racePosterCover } from "@/lib/covers";
 
 export function EventCard({ event }: { event: BbchEvent }) {
-  const cover = disciplineCover(event.discipline);
+  const cover = racePosterCover(event.id) ?? disciplineCover(event.discipline);
   return (
     <Link
       href={`/events/${event.slug}`}
