@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { RaceStructuredData, Breadcrumbs } from "@/components/structured-data";
 
 const REGISTER_URL = "https://konfhub.com/bbch26-race08";
 const FB_EVENT_URL = "https://www.facebook.com/events/1576143650552955/";
@@ -93,6 +94,24 @@ const rules = [
 export default function Race08Page() {
   return (
     <>
+      <RaceStructuredData
+        name="BBCh26 Race #08 — Apex ITT"
+        slug="bbch26-race08"
+        startDate="2026-09-20T06:00:00+05:30"
+        endDate="2026-09-20T11:00:00+05:30"
+        location="KIADB ITIR, STRR"
+        description="41 km individual time trial on the STRR — the race of truth. Elite, Amateur, Women, Masters, U-18 and Non-Road Bike categories."
+        image={POSTER_BANNER}
+        registrationUrl={REGISTER_URL}
+        status="scheduled"
+      />
+      <Breadcrumbs
+        items={[
+          { name: "Events", path: "/events" },
+          { name: "Race #08 — Apex ITT", path: "/events/bbch26-race08" },
+        ]}
+      />
+
       {/* HERO */}
       <section className="gloss-blue relative overflow-hidden text-white">
         <Container className="relative py-12 sm:py-16 lg:py-20">
