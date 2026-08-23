@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { EventResults } from "@/components/event-results";
+import { getEventBySlug, getResultsForEvent } from "@/lib/data";
 
-/** Direct-to-checkout link — skips the Explara landing page. */
-const REGISTER_URL = "https://www.explara.com/e/bbch26-race07/checkout";
+/** Event id created by the results importer for this race. */
+const EVENT_SLUG = "2026-race-07-xc";
 const EXPLARA_URL = "https://www.explara.com/e/bbch26-race07";
 const VENUE_MAP_URL = "https://goo.gl/maps/gqvZvtromXVbGxyV9";
 
@@ -14,14 +16,14 @@ const VENUE_MAP_URL = "https://goo.gl/maps/gqvZvtromXVbGxyV9";
 const POSTER = "/covers/BBCh26Race07_FB.jpg";
 
 export const metadata: Metadata = {
-  title: "Race #07 — MTB XC Race · 16 Aug 2026",
+  title: "Race #07 — MTB XC Race · Results",
   description:
-    "Register for BBCh26 Race #07 — MTB XC cross-country race on Sunday 16 August 2026 at Avathi, Nandi Hill Road, Bangalore. Elite, Amateur, Women, U-18, U-16, U-12, U-09 and fun-ride categories. Entries close 13 August.",
+    "Official results for BBCh26 Race #07 — MTB XC cross-country race, Sunday 16 August 2026 at Avathi, Nandi Hill Road, Bangalore. Open, U-16 and U-09 category results.",
   alternates: { canonical: "/events/bbch26-race07" },
   openGraph: {
-    title: "BBCh26 Race #07 — MTB XC Race · 16 Aug 2026",
+    title: "BBCh26 Race #07 — MTB XC Race · Results",
     description:
-      "Cross-country mountain bike racing at Avathi, Nandi Hill Road. Entries close Thursday 13 August 2026.",
+      "Official results from the MTB XC cross-country race at Avathi, Nandi Hill Road on 16 August 2026.",
     images: [
       {
         url: "/covers/BBCh26Race07_FB.jpg",
@@ -63,7 +65,11 @@ const rules = [
   "Juniors must carry photo ID showing date of birth; a guardian must accompany U-18 riders.",
 ];
 
-export default function Race07Page() {
+export default async function Race07Page() {
+  const event = await getEventBySlug(EVENT_SLUG);
+  const results = event ? await getResultsForEvent(event.id) : [];
+  const raceCategories = [...new Set(results.map((r) => r.category))].sort();
+
   return (
     <>
       {/* COVER — full-width official race banner, never cropped */}
@@ -102,21 +108,17 @@ export default function Race07Page() {
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
               <span className="h-2 w-2 rounded-full bg-yellow" />
-              Registration open — closes 13 August
+              Race complete — results published
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href={REGISTER_URL} external variant="yellow">
-                Register now →
+              <ButtonLink href="#results" variant="yellow">
+                View results
               </ButtonLink>
-              <ButtonLink href="#categories" variant="outlineLight">
-                Categories &amp; fees
+              <ButtonLink href="/results" variant="outlineLight">
+                Search all results
               </ButtonLink>
             </div>
-
-            <p className="mt-4 text-xs text-white/60">
-              Save ₹100 per entry on bulk registrations (1–10 riders) until 1 August.
-            </p>
           </div>
         </Container>
         <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
@@ -132,16 +134,43 @@ export default function Race07Page() {
         </Container>
       </section>
 
-      {/* CATEGORIES & FEES */}
-      <Container className="scroll-mt-20 py-16 sm:py-20" id="categories">
-        <p className="eyebrow text-ember">Race overview</p>
+      {/* RESULTS */}
+      <Container className="scroll-mt-20 py-16 sm:py-20" id="results">
+        <p className="eyebrow text-ember">Official results</p>
         <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Categories &amp; fees
+          Race #07 results
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
-          Thirteen categories from Elite down to a U-06 fun ride. Lap counts and
-          exact start times per category are published on the Friday or Saturday
-          before race day. Fees exclude payment gateway charges.
+          MTB XC Race · 16 August 2026 · Avathi, Nandi Hill Road
+          {results.length > 0 && ` · ${results.length} riders`}
+        </p>
+
+        {results.length === 0 ? (
+          <div className="mt-8 rounded-xl border border-line bg-cream p-10 text-center">
+            <p className="font-display text-lg font-bold text-ink">Results coming soon</p>
+            <p className="mt-2 text-sm text-greige">
+              Results are being processed. Check back shortly or{" "}
+              <Link href="/results" className="font-semibold text-ember hover:underline">
+                search the full archive
+              </Link>
+              .
+            </p>
+          </div>
+        ) : (
+          <EventResults categories={raceCategories} results={results} />
+        )}
+      </Container>
+
+      {/* CATEGORIES & FEES — kept for reference */}
+      <Container className="scroll-mt-20 pb-16 sm:pb-20" id="categories">
+        <p className="eyebrow text-ember">Race overview</p>
+        <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Entry categories &amp; fees
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
+          The thirteen entry types riders registered under. On race day these are
+          consolidated into the {raceCategories.length} racing categories shown in
+          the results above. Fees excluded payment gateway charges.
         </p>
 
         <div className="gloss-card mt-8 overflow-hidden rounded-xl border border-line">
@@ -170,11 +199,6 @@ export default function Race07Page() {
           </ul>
         </div>
 
-        <div className="mt-8">
-          <ButtonLink href={REGISTER_URL} external variant="yellow">
-            Register now →
-          </ButtonLink>
-        </div>
       </Container>
 
       {/* VENUE */}
@@ -282,18 +306,18 @@ export default function Race07Page() {
         </Container>
       </section>
 
-      {/* CTA — #register is the deep-link target from the homepage card */}
+      {/* CTA — #register kept as an anchor so older shared links still land here */}
       <Container className="scroll-mt-20 py-16 text-center" id="register">
         <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-          Entries close 13 August
+          Find your result
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-greige">
-          No spot registrations on race day — secure your slot before Thursday
-          midnight.
+          Search by rider name, year, discipline or category across every BBCh
+          season.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <ButtonLink href={REGISTER_URL} external variant="yellow">
-            Register now →
+          <ButtonLink href="/results" variant="primary">
+            Search results
           </ButtonLink>
           <ButtonLink href="/events" variant="outline">
             Back to all events

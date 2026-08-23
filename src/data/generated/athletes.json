@@ -24293,7 +24293,7 @@
 "slug": "nibhish-rangarajan",
 "name": "Nibhish Rangarajan",
 "gender": "M",
-"team": null,
+"team": "DELTA Team",
 "aliases": []
 },
 {
@@ -25542,6 +25542,78 @@
 "id": "nathan-chandrasekhar",
 "slug": "nathan-chandrasekhar",
 "name": "Nathan Chandrasekhar",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "rehan-thomas",
+"slug": "rehan-thomas",
+"name": "Rehan Thomas",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "uppu-k",
+"slug": "uppu-k",
+"name": "Uppu K",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "zu16-dummy-01",
+"slug": "zu16-dummy-01",
+"name": "ZU16 Dummy 01",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sanjay-maturu",
+"slug": "sanjay-maturu",
+"name": "Sanjay Maturu",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "shaurya-jha",
+"slug": "shaurya-jha",
+"name": "Shaurya Jha",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "rt-vishak-yudhan",
+"slug": "rt-vishak-yudhan",
+"name": "RT Vishak Yudhan",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "aja-trivikram",
+"slug": "aja-trivikram",
+"name": "Aja Trivikram",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "shivek-sumanth",
+"slug": "shivek-sumanth",
+"name": "Shivek Sumanth",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "karthikeya-polepalli",
+"slug": "karthikeya-polepalli",
+"name": "Karthikeya Polepalli",
 "gender": "M",
 "team": null,
 "aliases": []
