@@ -8,9 +8,11 @@ const REGISTER_URL = "https://konfhub.com/bbch26-race08";
 const FB_EVENT_URL = "https://www.facebook.com/events/1576143650552955/";
 const VENUE_MAP_URL = "https://maps.app.goo.gl/wkehsn2i1nQQvZz7A";
 
-/* Square (1024×1024) season poster — shown beside the hero copy, not full-bleed.
-   Swap for the official wide FB banner when it lands in /public/covers. */
-const POSTER = "/season-2026/race08-apex-itt.png";
+/* Official Race #08 posters now in /public/covers.
+   Insta square used for the hero (fits the aspect-square container perfectly).
+   FB Event banner used for OpenGraph / Twitter cards. */
+const POSTER_SQUARE = "/covers/BBCh26Race08_Insta.jpg";
+const POSTER_BANNER = "/covers/BBCh26Race08_FBEvent.jpg";
 
 export const metadata: Metadata = {
   title: "Race #08 — Apex ITT · 20 Sep 2026",
@@ -21,9 +23,9 @@ export const metadata: Metadata = {
     title: "BBCh26 Race #08 — Apex ITT · 20 Sep 2026",
     description:
       "41 km individual time trial on the STRR. The race of truth — you against the clock. Entries close Thursday 17 September 2026.",
-    images: [{ url: POSTER, width: 1024, height: 1024, alt: "BBCh26 Race #08 Apex ITT — 20 September 2026" }],
+    images: [{ url: POSTER_BANNER, width: 1200, height: 628, alt: "BBCh26 Race #08 Apex ITT — 20 September 2026" }],
   },
-  twitter: { card: "summary_large_image", images: [POSTER] },
+  twitter: { card: "summary_large_image", images: [POSTER_BANNER] },
 };
 
 const categories = [
@@ -134,7 +136,7 @@ export default function Race08Page() {
 
             <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-xl shadow-2xl sm:max-w-sm">
               <Image
-                src={POSTER}
+                src={POSTER_SQUARE}
                 alt="BBCh26 Race #08 Apex ITT — Sunday 20 September 2026, KIADB ITIR, STRR."
                 fill
                 unoptimized

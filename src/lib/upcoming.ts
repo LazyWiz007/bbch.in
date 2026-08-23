@@ -26,7 +26,7 @@ const UPCOMING: UpcomingEvent[] = [
     location: "KIADB ITIR, STRR, Bengaluru",
     discipline: "ITT",
     registrationUrl: "https://konfhub.com/bbch26-race08",
-    cover: "/season-2026/race08-apex-itt.png",
+    cover: "/covers/BBCh26Race08_FBEvent.jpg",
     detailsUrl: "/events/bbch26-race08",
   },
 ];

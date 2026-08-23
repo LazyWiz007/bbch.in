@@ -44,6 +44,8 @@ const RACE_POSTER_MAP: Record<string, string> = {
   // Race #07 poster exists; entry ready for when results are imported
   "2026-race-07-xc":
     `${BASE}/2026/Race%20%2307%20-%20XC/BBCh26Race07_Website.jpg`,
+  // Race #08 Apex ITT — using FB Event poster (no Website variant yet)
+  "2026-race-08-apex-itt": "/covers/BBCh26Race08_FBEvent.jpg",
 
   // ── 2025 ──────────────────────────────────────────────────────────────
   "2025-race-01-xc":
