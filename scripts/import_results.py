@@ -189,7 +189,7 @@ for year in sorted(os.listdir(BASE)):
             ci_place=col_idx(header,"place","position","pos","rank")
             ci_bib=col_idx(header,"bib","bib no","bib no.")
             ci_team=col_idx(header,"team name","team","team name ")
-            ci_time=col_idx(header,"time","race time","finish time","overall time")
+            ci_time=col_idx(header,"time","race time","finish time","overall time","total")
             if ci_name is None: continue
             disc2 = discipline_for(race, raw_tab) or disc
             for row in ws.iter_rows(min_row=hr+1, max_col=max(filter(None,[ci_name,ci_place,ci_bib,ci_team,ci_time]))+1, values_only=True):
