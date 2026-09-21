@@ -139,7 +139,7 @@ const RACES: Race[] = [
     day: 11,
     location: "Avathi / School / University",
     discipline: "MTB",
-    cover: "/season-2026/race09-supreme-mtb.png",
+    cover: "/covers/BBCh26Race09_FB.jpg",
     status: "upcoming",
   },
   {

@@ -26,7 +26,7 @@ const UPCOMING: UpcomingEvent[] = [
     location: "Avathi, Nandi Hill Road, Bengaluru",
     discipline: "MTB (XC)",
     registrationUrl: "https://www.explara.com/e/bbch26-race09",
-    cover: "/season-2026/race09-supreme-mtb.png",
+    cover: "/covers/BBCh26Race09_FB.jpg",
     detailsUrl: "/events/bbch26-race09",
   },
 ];

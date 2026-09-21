@@ -9,9 +9,10 @@ const REGISTER_URL = "https://www.explara.com/e/bbch26-race09";
 const FB_EVENT_URL = "https://www.facebook.com/events/1777720650210607/";
 const VENUE_MAP_URL = "https://goo.gl/maps/gqvZvtromXVbGxyV9";
 
-/* Square season poster. Swap for the official banner when it lands in
-   /public/covers/Race Posters/2026/Race #09 - XC/. */
-const POSTER = "/season-2026/race09-supreme-mtb.png";
+/* Official Race #09 banner (1925x1104). Key artwork sits in the corners —
+   venue/date, logo, "MTB XC RACE", "TRAIL RUN 10KM" — so always render it
+   uncropped, never inside a fixed or square aspect box. */
+const POSTER = "/covers/BBCh26Race09_FB.jpg";
 
 export const metadata: Metadata = {
   title: "Race #09 — MTB XC & Trail Run · 18 Oct 2026",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: "BBCh26 Race #09 — MTB XC Race & Trail Run · 18 Oct 2026",
     description:
       "Cross-country mountain biking and a 10 km trail run at Avathi, Nandi Hill Road. Entries close Thursday 15 October 2026.",
-    images: [{ url: POSTER, width: 1024, height: 1024, alt: "BBCh26 Race #09 MTB XC Race & Trail Run — 18 October 2026" }],
+    images: [{ url: POSTER, width: 1925, height: 1104, alt: "BBCh26 Race #09 MTB XC Race & Trail Run — 18 October 2026" }],
   },
   twitter: { card: "summary_large_image", images: [POSTER] },
 };
@@ -68,57 +69,55 @@ export default function Race09Page() {
         ]}
       />
 
+      {/* COVER — full-width official banner, never cropped */}
+      <section className="bg-ink">
+        <Image
+          src={POSTER}
+          alt="BBCh26 Race #09 — MTB XC Race and Trail Run 10km. Avathi, 18 Oct 2026. Register at bbch.in"
+          width={1925}
+          height={1104}
+          priority
+          unoptimized
+          sizes="100vw"
+          className="h-auto w-full"
+        />
+      </section>
+
       {/* HERO */}
       <section className="gloss-blue relative overflow-hidden text-white">
-        <Container className="relative py-12 sm:py-16 lg:py-20">
+        <Container className="relative py-10 sm:py-14">
           <Link href="/events" className="text-sm text-white/70 transition-colors hover:text-yellow">
             ← All events
           </Link>
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-12">
-            <div>
-              <p className="eyebrow text-yellow">Race #09 · BBCh 2026 season</p>
-              <h1 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
-                MTB XC Race
-                <br />
-                &amp; Trail Run
-              </h1>
+          <div className="mt-6 max-w-3xl">
+            <p className="eyebrow text-yellow">Race #09 · BBCh 2026 season</p>
+            <h1 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+              MTB XC Race &amp; Trail Run
+            </h1>
 
-              <div className="mt-6 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-8">
-                <span>📅 Sunday, 18 October 2026</span>
-                <span>📍 Avathi, Nandi Hill Road, Bangalore</span>
-              </div>
-
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
-                <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
-                Registration open — closes 15 October
-              </div>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <ButtonLink href={REGISTER_URL} external variant="yellow">
-                  Register now →
-                </ButtonLink>
-                <ButtonLink href="#categories" variant="outlineLight">
-                  Categories &amp; fees
-                </ButtonLink>
-              </div>
-
-              <p className="mt-4 text-xs leading-relaxed text-white/60">
-                Early bird: ₹100 off until 30 September. No spot registration on race day.
-              </p>
+            <div className="mt-6 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-8">
+              <span>📅 Sunday, 18 October 2026</span>
+              <span>📍 Avathi, Nandi Hill Road, Bangalore</span>
             </div>
 
-            <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-xl shadow-2xl sm:max-w-sm">
-              <Image
-                src={POSTER}
-                alt="BBCh26 Race #09 MTB XC Race and Trail Run — Sunday 18 October 2026, Avathi, Nandi Hill Road."
-                fill
-                unoptimized
-                priority
-                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 60vw, 420px"
-                className="object-cover"
-              />
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
+              Registration open — closes 15 October
             </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ButtonLink href={REGISTER_URL} external variant="yellow">
+                Register now →
+              </ButtonLink>
+              <ButtonLink href="#categories" variant="outlineLight">
+                Categories &amp; fees
+              </ButtonLink>
+            </div>
+
+            <p className="mt-4 text-xs leading-relaxed text-white/60">
+              Early bird: ₹100 off until 30 September. No spot registration on race day.
+            </p>
           </div>
         </Container>
         <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
