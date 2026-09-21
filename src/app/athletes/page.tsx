@@ -5,8 +5,10 @@ import { AthletesExplorer } from "@/components/athletes-explorer";
 import { getAthleteSummaries } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Athletes",
-  description: "Browse BBCh rider profiles and their full racing history.",
+  title: "Riders — Race History & Standings",
+  description:
+    "Every rider who has raced a Bangalore Bicycle Championships event. Browse race counts, wins, best finishes and full season-by-season history.",
+  alternates: { canonical: "/athletes" },
 };
 
 export default function AthletesPage() {

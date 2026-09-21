@@ -18,16 +18,16 @@ export interface UpcomingEvent {
   database instead. Keep only events that have actually been announced.
 */
 const UPCOMING: UpcomingEvent[] = [
-  // Race #06 (19 Jul 2026) and Race #07 (16 Aug 2026) have concluded.
+  // Races #06-#08 have concluded; their pages now show results.
   {
-    id: "bbch26-race08",
-    name: "Race #08 — Apex ITT",
-    date: "2026-09-20",
-    location: "KIADB ITIR, STRR, Bengaluru",
-    discipline: "ITT",
-    registrationUrl: "https://konfhub.com/bbch26-race08",
-    cover: "/covers/BBCh26Race08_FBEvent.jpg",
-    detailsUrl: "/events/bbch26-race08",
+    id: "bbch26-race09",
+    name: "Race #09 — MTB XC Race & Trail Run",
+    date: "2026-10-18",
+    location: "Avathi, Nandi Hill Road, Bengaluru",
+    discipline: "MTB (XC)",
+    registrationUrl: "https://www.explara.com/e/bbch26-race09",
+    cover: "/season-2026/race09-supreme-mtb.png",
+    detailsUrl: "/events/bbch26-race09",
   },
 ];
 

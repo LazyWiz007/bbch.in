@@ -10,7 +10,8 @@ import { getEvents, getSeasons } from "@/lib/data";
 import { getUpcomingEvents, dateParts, formatDate } from "@/lib/upcoming";
 
 export const metadata: Metadata = {
-  title: "Events",
+  title: "Race Calendar & Event Archive",
+  alternates: { canonical: "/events" },
   description:
     "Every BBCh race, season by season — road, MTB, time trials and more. Plus upcoming races open for registration.",
 };

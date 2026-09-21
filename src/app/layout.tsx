@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { IntroLoader } from "@/components/intro-loader";
+import { SiteStructuredData } from "@/components/structured-data";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
@@ -128,6 +129,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-paper text-ink"
         suppressHydrationWarning
       >
+        <SiteStructuredData />
         <IntroLoader />
         <Navbar />
         <main className="flex-1">{children}</main>

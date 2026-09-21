@@ -5,7 +5,8 @@ import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Season Calendar 2026 — 18th Edition",
+  title: "Season 2026 — Race Calendar & Standings",
+  alternates: { canonical: "/season-calendar" },
   description:
     "BBCh 2026 Season Calendar — India's longest-running cycling championship enters its 18th edition with 10 epic races across Bengaluru. Road races, MTB, Gravel, ITT and the legendary Nandi Epic.",
 };

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getEvents, getAthleteSummaries } from "@/lib/data";
+import { SITE_URL, shouldIndexRider } from "@/lib/seo";
 
-export const SITE_URL = "https://bbch.in";
+export { SITE_URL };
 
 /**
  * XML sitemap served at /sitemap.xml (Next generates the XML automatically).
@@ -20,7 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/events", priority: 0.9, changeFrequency: "weekly" },
     { path: "/season-calendar", priority: 0.9, changeFrequency: "weekly" },
     // Upcoming race landing pages — high priority while registration is open.
-    { path: "/events/bbch26-race08", priority: 0.9, changeFrequency: "daily" },
+    { path: "/events/bbch26-race09", priority: 0.9, changeFrequency: "daily" },
+    { path: "/events/bbch26-race08", priority: 0.6, changeFrequency: "monthly" },
     { path: "/events/bbch26-race07", priority: 0.6, changeFrequency: "monthly" },
     { path: "/results", priority: 0.8, changeFrequency: "weekly" },
     { path: "/athletes", priority: 0.8, changeFrequency: "weekly" },
@@ -39,19 +41,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: r.priority,
   }));
 
+  const thisYear = new Date().getFullYear();
   const eventEntries: MetadataRoute.Sitemap = getEvents().map((e) => ({
     url: `${SITE_URL}/events/${e.slug}`,
     lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.7,
+    changeFrequency: "monthly" as const,
+    // Current-season races are what people actually search for.
+    priority: e.year >= thisYear ? 0.8 : e.year >= thisYear - 1 ? 0.6 : 0.5,
   }));
 
-  const athleteEntries: MetadataRoute.Sitemap = getAthleteSummaries().map((a) => ({
-    url: `${SITE_URL}/athletes/${a.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.5,
-  }));
+  // Only real riders with a genuine race history. Import artifacts ("* - Dnf",
+  // "ZA Dummy 01") and one-off entries are left out — 3,000+ thin rider URLs
+  // were drowning out the real sections of the site and getting picked as
+  // Google sitelinks.
+  const athleteEntries: MetadataRoute.Sitemap = getAthleteSummaries()
+    .filter((a) => shouldIndexRider(a.name, a.races))
+    .map((a) => ({
+      url: `${SITE_URL}/athletes/${a.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      // Deliberately low: rider pages are the long tail, not the site's shape.
+      priority: a.races >= 10 ? 0.4 : 0.3,
+    }));
 
   return [...staticEntries, ...eventEntries, ...athleteEntries];
 }

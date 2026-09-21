@@ -11,6 +11,7 @@ import {
   getResultsForAthlete,
   getPersonalBest,
 } from "@/lib/data";
+import { shouldIndexRider } from "@/lib/seo";
 
 export function generateStaticParams() {
   return athletes.map((a) => ({ slug: a.slug }));
@@ -24,9 +25,32 @@ export async function generateMetadata({
   const { slug } = await params;
   const athlete = getAthleteBySlug(slug);
   if (!athlete) return { title: "Rider not found" };
+
+  const races = getResultsForAthlete(athlete.id).length;
+  const wins = getResultsForAthlete(athlete.id).filter((r) => r.rank === 1).length;
+  const indexable = shouldIndexRider(athlete.name, races);
+
+  const desc =
+    races > 0
+      ? `${athlete.name}'s BBCh race record${athlete.team ? ` for ${athlete.team}` : ""} — ` +
+        `${races} race${races === 1 ? "" : "s"}${wins > 0 ? `, ${wins} win${wins === 1 ? "" : "s"}` : ""}. ` +
+        `Full results, finishing times and season progress.`
+      : `${athlete.name} — BBCh rider profile, race history and results.`;
+
   return {
-    title: athlete.name,
-    description: `${athlete.name} — BBCh race history, results and progress.`,
+    // Descriptive title: a bare name like "Jw" reads as a nav label to Google
+    // and gets picked up as a sitelink.
+    title: `${athlete.name} — Rider Profile & Race Results`,
+    description: desc,
+    alternates: { canonical: `/athletes/${athlete.slug}` },
+    // Thin one-off entries and import artifacts stay out of the index so they
+    // stop competing with the real sections of the site.
+    robots: indexable ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: `${athlete.name} — BBCh Rider Profile`,
+      description: desc,
+      type: "profile",
+    },
   };
 }
 

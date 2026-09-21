@@ -11464,11 +11464,11 @@
 {
 "id": "muzzakir-hussain",
 "slug": "muzzakir-hussain",
-"name": "Muzzakir hussain",
+"name": "Muzzakir Hussain",
 "gender": "M",
 "team": "Triblr",
 "aliases": [
-"Muzzakir Hussain"
+"Muzzakir hussain"
 ]
 },
 {
@@ -15528,7 +15528,7 @@
 "slug": "ujjwal-anand",
 "name": "Ujjwal Anand",
 "gender": "M",
-"team": null,
+"team": "Team ULTRA",
 "aliases": []
 },
 {
@@ -25616,6 +25616,102 @@
 "name": "Karthikeya Polepalli",
 "gender": "M",
 "team": null,
+"aliases": []
+},
+{
+"id": "shankar-k-shankar",
+"slug": "shankar-k-shankar",
+"name": "Shankar k Shankar",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "himanshu-dabral",
+"slug": "himanshu-dabral",
+"name": "Himanshu Dabral",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "dhanush-prasnth",
+"slug": "dhanush-prasnth",
+"name": "Dhanush Prasnth",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "eshwar-nilakantan",
+"slug": "eshwar-nilakantan",
+"name": "Eshwar Nilakantan",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "prahladh-nc",
+"slug": "prahladh-nc",
+"name": "Prahladh NC",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "vishal-desai",
+"slug": "vishal-desai",
+"name": "Vishal Desai",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sudipta-roy",
+"slug": "sudipta-roy",
+"name": "Sudipta Roy",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "sumanth-n",
+"slug": "sumanth-n",
+"name": "Sumanth N",
+"gender": "M",
+"team": "Bengaluru Cycling Club",
+"aliases": []
+},
+{
+"id": "eshwar-b-m",
+"slug": "eshwar-b-m",
+"name": "Eshwar B M",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "tushar-ghosh",
+"slug": "tushar-ghosh",
+"name": "Tushar Ghosh",
+"gender": "M",
+"team": null,
+"aliases": []
+},
+{
+"id": "gungun-gupta",
+"slug": "gungun-gupta",
+"name": "Gungun Gupta",
+"gender": "F",
+"team": null,
+"aliases": []
+},
+{
+"id": "swati-byndoor",
+"slug": "swati-byndoor",
+"name": "Swati Byndoor",
+"gender": "F",
+"team": "Team ULTRA",
 "aliases": []
 }
 ]

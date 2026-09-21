@@ -5,9 +5,10 @@ import { ResultsExplorer } from "@/components/results-explorer";
 import { getSearchRows, getSeasons, getDisciplines, getTopCategories } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Results",
+  title: "Race Results — Every BBCh Season",
+  alternates: { canonical: "/results" },
   description:
-    "Search BBCh race results by rider name across every season, discipline and category — 2015 to today.",
+    "Search Bangalore Bicycle Championships race results by rider, year, discipline or category. Every finishing time and position from 2015 to today.",
 };
 
 export default function ResultsPage() {

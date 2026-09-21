@@ -22,7 +22,16 @@ export function EventsBrowser({
   );
 
   const yearEvents = events.filter((e) => e.year === year);
-  const ghostEvents = getGhostEventsForYear(year);
+
+  // A ghost is only a placeholder for a race we have no results for yet. Once
+  // the real results are imported, drop the ghost so the race isn't listed
+  // twice (e.g. Race #07 2026 appearing both as a real card and a "No results
+  // data" ghost).
+  const realRaceNos = new Set(yearEvents.map((e) => e.raceNo));
+  const ghostEvents = getGhostEventsForYear(year).filter(
+    (g) => !realRaceNos.has(g.raceNo)
+  );
+
   const totalRaces = yearEvents.length + ghostEvents.length;
 
   // Merge real and ghost events, sorted by race number (raceNo 99 = misc, goes last)

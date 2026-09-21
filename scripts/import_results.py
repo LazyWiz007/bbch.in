@@ -67,6 +67,7 @@ def series_for(name):
     if "classic" in n: return "Bangalore Classic"
     if "express" in n: return "Express"
     if "nandi epic" in n: return "Nandi Epic"
+    if "apex" in n: return "Apex ITT"
     if "namma itt" in n or ("itt" in n and "ttt" not in n): return "Namma ITT"
     return None
 

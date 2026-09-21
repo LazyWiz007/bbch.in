@@ -4,8 +4,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { RaceStructuredData, Breadcrumbs } from "@/components/structured-data";
+import { EventResults } from "@/components/event-results";
+import { getEventBySlug, getResultsForEvent } from "@/lib/data";
 
 const REGISTER_URL = "https://konfhub.com/bbch26-race08";
+const EVENT_SLUG = "2026-race-08-apex-itt";
 const FB_EVENT_URL = "https://www.facebook.com/events/1576143650552955/";
 const VENUE_MAP_URL = "https://maps.app.goo.gl/wkehsn2i1nQQvZz7A";
 
@@ -16,14 +19,14 @@ const POSTER_SQUARE = "/covers/BBCh26Race08_Insta.jpg";
 const POSTER_BANNER = "/covers/BBCh26Race08_FBEvent.jpg";
 
 export const metadata: Metadata = {
-  title: "Race #08 — Apex ITT · 20 Sep 2026",
+  title: "Race #08 — Apex ITT · Results",
   description:
-    "Register for BBCh26 Race #08 — Apex Individual Time Trial, Sunday 20 September 2026 at KIADB ITIR, STRR, Bangalore. 41 km against the clock. Elite, Amateur, Women, Masters, U-18 and Non-Road Bike categories. Entries close 17 September.",
+    "Official results for BBCh26 Race #08 — Apex Individual Time Trial, Sunday 20 September 2026 at KIADB ITIR, STRR, Bangalore. 41 km against the clock across Elite, Amateur, Women and Men Master categories.",
   alternates: { canonical: "/events/bbch26-race08" },
   openGraph: {
-    title: "BBCh26 Race #08 — Apex ITT · 20 Sep 2026",
+    title: "BBCh26 Race #08 — Apex ITT · Results",
     description:
-      "41 km individual time trial on the STRR. The race of truth — you against the clock. Entries close Thursday 17 September 2026.",
+      "Official results from the 41 km individual time trial on the STRR, 20 September 2026.",
     images: [{ url: POSTER_BANNER, width: 1200, height: 628, alt: "BBCh26 Race #08 Apex ITT — 20 September 2026" }],
   },
   twitter: { card: "summary_large_image", images: [POSTER_BANNER] },
@@ -91,7 +94,11 @@ const rules = [
   "U-18 riders must carry photo + date-of-birth ID and be accompanied by a parent or guardian.",
 ];
 
-export default function Race08Page() {
+export default async function Race08Page() {
+  const event = await getEventBySlug(EVENT_SLUG);
+  const results = event ? await getResultsForEvent(event.id) : [];
+  const raceCategories = [...new Set(results.map((r) => r.category))].sort();
+
   return (
     <>
       <RaceStructuredData
@@ -103,7 +110,7 @@ export default function Race08Page() {
         description="41 km individual time trial on the STRR — the race of truth. Elite, Amateur, Women, Masters, U-18 and Non-Road Bike categories."
         image={POSTER_BANNER}
         registrationUrl={REGISTER_URL}
-        status="scheduled"
+        status="completed"
       />
       <Breadcrumbs
         items={[
@@ -136,21 +143,17 @@ export default function Race08Page() {
 
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
-                Registration open — closes 17 September
+Race complete — results published
               </div>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <ButtonLink href={REGISTER_URL} external variant="yellow">
-                  Register now →
+                <ButtonLink href="#results" variant="yellow">
+                  View results
                 </ButtonLink>
-                <ButtonLink href="#categories" variant="outlineLight">
-                  Categories &amp; fees
+                <ButtonLink href="/results" variant="outlineLight">
+                  Search all results
                 </ButtonLink>
               </div>
-
-              <p className="mt-4 text-xs leading-relaxed text-white/60">
-                Early bird: ₹100 off until 28 August. No spot registration on race day.
-              </p>
             </div>
 
             <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-xl shadow-2xl sm:max-w-sm">
@@ -178,6 +181,35 @@ export default function Race08Page() {
           <Fact k="Cut-off" v="80 min" sub="90 min for Women, U-18, Non-Road" />
         </Container>
       </section>
+
+      {/* RESULTS */}
+      <Container className="scroll-mt-20 py-12 sm:py-16" id="results">
+        <p className="eyebrow text-ember">Official results</p>
+        <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
+          Race #08 results
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
+          Apex ITT · 20 September 2026 · KIADB ITIR, STRR
+          {results.length > 0 && ` · ${results.length} riders`}
+        </p>
+
+        {results.length === 0 ? (
+          <div className="mt-8 rounded-xl border border-line bg-cream p-10 text-center">
+            <p className="font-display text-lg font-bold text-ink">Results coming soon</p>
+            <p className="mt-2 text-sm text-greige">
+              Results are being processed. Check back shortly or{" "}
+              <Link href="/results" className="font-semibold text-ember hover:underline">
+                search the full archive
+              </Link>
+              .
+            </p>
+          </div>
+        ) : (
+          <div className="mt-6">
+            <EventResults categories={raceCategories} results={results} />
+          </div>
+        )}
+      </Container>
 
       {/* WHAT IS AN ITT */}
       <Container className="py-12 sm:py-16">
@@ -217,7 +249,7 @@ export default function Race08Page() {
         <Container>
           <p className="eyebrow text-ember">Race overview</p>
           <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
-            Categories &amp; fees
+            Entry categories &amp; fees
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
             Seven categories, all racing the same 41 km course. Entry is ₹999
@@ -248,12 +280,6 @@ export default function Race08Page() {
               ))}
             </ul>
           </div>
-
-          <div className="mt-8">
-            <ButtonLink href={REGISTER_URL} external variant="yellow">
-              Register now →
-            </ButtonLink>
-          </div>
         </Container>
       </section>
 
@@ -279,8 +305,8 @@ export default function Race08Page() {
           />
           <RouteCard
             title="U-turn"
-            points={["Hoskote side, under the flyover at ~20 km"]}
-            href="https://maps.app.goo.gl/GDQXN4tSiUhZmtQr7"
+            points={["Dobbaspet side, under the flyover at ~20 km"]}
+            href="https://maps.app.goo.gl/G6mmiTnPnB4izMcE8"
             label="Open U-turn"
           />
           <RouteCard
@@ -359,17 +385,17 @@ export default function Race08Page() {
         </Container>
       </section>
 
-      {/* CTA */}
+      {/* CTA — #register kept so older shared links still land somewhere sensible */}
       <Container className="scroll-mt-20 py-12 text-center sm:py-16" id="register">
         <h2 className="font-display text-xl font-extrabold tracking-tight sm:text-2xl lg:text-3xl">
-          Entries close 17 September
+          Find your result
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-greige">
-          No spot registrations on race day — and ₹100 off if you enter before 28 August.
+          Search by rider name, year, discipline or category across every BBCh season.
         </p>
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <ButtonLink href={REGISTER_URL} external variant="yellow">
-            Register now →
+          <ButtonLink href="/results" variant="primary">
+            Search results
           </ButtonLink>
           <ButtonLink href="/events" variant="outline">
             Back to all events
