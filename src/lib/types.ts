@@ -28,12 +28,24 @@ export interface BbchEvent {
 export type Gender = "M" | "F";
 
 export interface Athlete {
+  /** Same value as `uid` for real riders; placeholders use an "x-" id. */
   id: string;
+  /**
+   * Permanent rider number (bbchNNNNN). Assigned once and never changed or
+   * reused, so the same person stays recognisable across seasons and can be
+   * quoted when registering for the next race. Null for placeholder rows.
+   */
+  uid?: string | null;
   slug: string;
   name: string;
   gender: Gender;
   team?: string | null;
+  /** Other spellings of this rider's name that have appeared in results. */
   aliases?: string[];
+  /** UIDs merged into this rider; kept so old references still resolve. */
+  retiredUids?: string[];
+  /** True for start-list padding rows that are not real people. */
+  placeholder?: boolean;
   imageUrl?: string;
 }
 

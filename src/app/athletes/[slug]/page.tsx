@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { ResultsTable } from "@/components/results-table";
 import { RankChart } from "@/components/rank-chart";
 import {
   athletes,
   getAthleteBySlug,
+  resolveAthlete,
   getResultsForAthlete,
   getPersonalBest,
 } from "@/lib/data";
 import { shouldIndexRider } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return athletes.map((a) => ({ slug: a.slug }));
+  return athletes.filter((a) => !a.placeholder).map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({
@@ -23,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const athlete = getAthleteBySlug(slug);
+  const athlete = getAthleteBySlug(slug) ?? resolveAthlete(slug);
   if (!athlete) return { title: "Rider not found" };
 
   const races = getResultsForAthlete(athlete.id).length;
@@ -65,7 +66,14 @@ export default async function AthleteProfilePage({
 }) {
   const { slug } = await params;
   const athlete = getAthleteBySlug(slug);
-  if (!athlete) notFound();
+  if (!athlete) {
+    // Riders who were merged into another record keep their old URL working:
+    // an alias or a retired UID still resolves, so send it on permanently
+    // rather than 404ing a link that has been shared or indexed.
+    const merged = resolveAthlete(slug);
+    if (merged) permanentRedirect(`/athletes/${merged.slug}`);
+    notFound();
+  }
 
   const rows = getResultsForAthlete(athlete.id);
   const best = getPersonalBest(athlete.id);
@@ -106,6 +114,21 @@ export default async function AthleteProfilePage({
                 {" · "}
                 {athlete.gender === "F" ? "Women" : "Men"}
               </p>
+              {/* Permanent rider number — quote it when entering the next
+                  race and the entry is matched to this record automatically. */}
+              {athlete.uid && (
+                <p className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                  <span className="text-greige-400">Rider ID</span>
+                  <code className="rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-sm font-semibold tracking-wider text-white">
+                    {athlete.uid.toUpperCase()}
+                  </code>
+                </p>
+              )}
+              {athlete.aliases && athlete.aliases.length > 0 && (
+                <p className="mt-2 text-xs text-greige-400">
+                  Also recorded as {athlete.aliases.join(", ")}
+                </p>
+              )}
             </div>
           </div>
         </Container>

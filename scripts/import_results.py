@@ -245,20 +245,98 @@ for year in sorted(os.listdir(BASE)):
             "resultCount":ev_results,"resultsPublished":True,
         })
 
+# ---------- identity: resolve every rider to a permanent UID ----------
+# src/data/athlete-registry.json is the source of truth for WHO a rider is.
+# A UID is assigned once and never changes, so the same person stays
+# recognisable across seasons and can be used to register them next time.
+# Here we only READ it, and append an entry for a genuinely new name.
+REG_PATH=os.path.abspath(os.path.join(OUT,os.pardir,"athlete-registry.json"))
+registry=json.load(open(REG_PATH)) if os.path.exists(REG_PATH) else \
+    {"schemaVersion":1,"nextUid":"bbch00001","athletes":[]}
+
+# name/alias -> registry entry
+reg_by_key={}
+for e in registry["athletes"]:
+    for n in [e["name"]]+list(e.get("aliases") or []):
+        reg_by_key.setdefault(norm_key(n), e)
+
+# Placeholder rows that exist to pad a start list or mark a blank slot.
+# They are not people, so they never enter the registry and never get a UID;
+# they keep a local "x-" id so their result rows stay intact.
+JUNK_RE=re.compile(r"dummy|^\s*\*|^\s*-|\bdnf\b|\bdns\b|^test\b", re.I)
+def is_junk(n):
+    n = n or ""
+    # A long string in the name column is a note the timekeeper typed, e.g.
+    # "BIB was not clearly visible at the race, ...", not a rider.
+    if len(n) > 60 or len(n.split()) > 7:
+        return True
+    return bool(JUNK_RE.search(n)) or len(norm_key(n)) < 2
+
+def next_uid():
+    n=max([int(e["uid"][4:]) for e in registry["athletes"]
+           if re.fullmatch(r"bbch\d{5}", e["uid"])] or [0])+1
+    return f"bbch{n:05d}"
+
 # finalize athletes
 final_ath={}
 used_slugs=Counter()
+new_riders=[]
 for key,a in athletes.items():
     disp=a["names"].most_common(1)[0][0]
+    entry=reg_by_key.get(key) or reg_by_key.get(norm_key(disp))
+    if entry is None and is_junk(disp):
+        slug=slugify(disp); used_slugs[slug]+=1
+        if used_slugs[slug]>1: slug=f"{slug}-{used_slugs[slug]}"
+        final_ath[key]={
+            "id":f"x-{slug}","uid":None,"slug":slug,"name":disp,
+            "gender":a["genders"].most_common(1)[0][0],
+            "team":a["teams"].most_common(1)[0][0] if a["teams"] else None,
+            "aliases":[],"retiredUids":[],"placeholder":True,
+        }
+        continue
+    if entry is None:
+        # Someone who has never raced before: mint a UID and record them so
+        # the next import recognises them.
+        entry={"uid":next_uid(),"name":disp,
+               "gender":a["genders"].most_common(1)[0][0],
+               "team":a["teams"].most_common(1)[0][0] if a["teams"] else None,
+               "aliases":[],"retiredUids":[]}
+        registry["athletes"].append(entry)
+        reg_by_key[norm_key(disp)]=entry
+        new_riders.append(disp)
+    # The registry decides the display name, so the owner's chosen spelling
+    # survives every re-import.
+    disp=entry["name"]
     slug=slugify(disp); used_slugs[slug]+=1
     if used_slugs[slug]>1: slug=f"{slug}-{used_slugs[slug]}"
-    gid=slug
+    seen_names=[n for n,_ in a["names"].most_common() if n!=disp]
     final_ath[key]={
-        "id":gid,"slug":slug,"name":disp,
-        "gender":a["genders"].most_common(1)[0][0],
-        "team":a["teams"].most_common(1)[0][0] if a["teams"] else None,
-        "aliases":[n for n,_ in a["names"].most_common() if n!=disp][:5],
+        "id":entry["uid"],"uid":entry["uid"],"slug":slug,"name":disp,
+        "gender":entry.get("gender") or a["genders"].most_common(1)[0][0],
+        "team":entry.get("team") or (a["teams"].most_common(1)[0][0] if a["teams"] else None),
+        "aliases":sorted(set((entry.get("aliases") or [])+seen_names))[:8],
+        "retiredUids":entry.get("retiredUids") or [],
     }
+
+# Collapse rows that the registry says are the same person (the owner's
+# merges), so one rider is one record even when the sheets spell them
+# differently.
+by_uid={}
+for key,a in list(final_ath.items()):
+    if not a.get("uid"):
+        continue          # placeholders share no identity; keep them distinct
+    tgt=by_uid.get(a["uid"])
+    if tgt is None:
+        by_uid[a["uid"]]=a
+    else:
+        tgt["aliases"]=sorted(set(tgt["aliases"]+a["aliases"]+[a["name"]])-{tgt["name"]})[:8]
+        final_ath[key]=tgt
+
+if new_riders:
+    registry["nextUid"]=next_uid()
+    json.dump(registry, open(REG_PATH,"w"), ensure_ascii=False, indent=1)
+    print(f"registry: minted {len(new_riders)} new UID(s): "
+          f"{', '.join(new_riders[:8])}{' ...' if len(new_riders)>8 else ''}")
 # map results athleteKey -> id
 for r in results:
     r["athleteId"]=final_ath[r["athleteKey"]]["id"]
@@ -267,14 +345,21 @@ for r in results:
 events=[e for e in events if e["resultCount"]>0]
 good_ids=set(e["id"] for e in events)
 results=[r for r in results if r["eventId"] in good_ids]
-json.dump(list(final_ath.values()), open(os.path.join(OUT,"athletes.json"),"w"), ensure_ascii=False, indent=0)
+# One record per rider: merged spellings share a UID and must not be written
+# out more than once.
+seen_ids=set(); athletes_out=[]
+for a in final_ath.values():
+    if a["id"] in seen_ids: continue
+    seen_ids.add(a["id"]); athletes_out.append(a)
+athletes_out.sort(key=lambda a: (a["name"] or "").casefold())
+json.dump(athletes_out, open(os.path.join(OUT,"athletes.json"),"w"), ensure_ascii=False, indent=0)
 json.dump(events, open(os.path.join(OUT,"events.json"),"w"), ensure_ascii=False, indent=0)
 json.dump(results, open(os.path.join(OUT,"results.json"),"w"), ensure_ascii=False, indent=0)
 
 # ---------- report ----------
 print("=== IMPORT SUMMARY ===")
 print("events:", len(events))
-print("athletes (deduped):", len(final_ath))
+print("athletes (deduped):", len(athletes_out))
 print("results (rows):", len(results))
 finishers=sum(1 for r in results if r["rank"])
 print("  finishers:", finishers, " non-finishers(DNF/DNS):", len(results)-finishers)
@@ -286,7 +371,7 @@ print("events by year:", dict(sorted(by_year.items())))
 print("\ncategories used:", dict(Counter(r["category"] for r in results)))
 print("\ntop 12 athletes by #races:")
 cnt=Counter(r["athleteId"] for r in results)
-id2name={a["id"]:a["name"] for a in final_ath.values()}
+id2name={a["id"]:a["name"] for a in athletes_out}
 for aid,c in cnt.most_common(12):
     print(f"   {c:3d}  {id2name[aid]}")
 print("\n--- ISSUES ---")

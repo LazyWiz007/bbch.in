@@ -53,6 +53,25 @@ const eventById = new Map(events.map((e) => [e.id, e]));
 const athleteById = new Map(athletes.map((a) => [a.id, a]));
 const athleteBySlug = new Map(athletes.map((a) => [a.slug, a]));
 
+/*
+  Rider identity lookups. A rider can be reached by their permanent UID, by a
+  UID that was merged into them, or by any name spelling that has appeared in
+  results — so old links and old spreadsheets keep working after a merge.
+*/
+const athleteByUid = new Map<string, Athlete>();
+const athleteByAlias = new Map<string, Athlete>();
+const aliasKey = (s: string) =>
+  s.normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+for (const a of athletes) {
+  if (a.uid) athleteByUid.set(a.uid.toLowerCase(), a);
+  for (const u of a.retiredUids ?? []) athleteByUid.set(u.toLowerCase(), a);
+  athleteByAlias.set(aliasKey(a.name), a);
+  for (const n of a.aliases ?? []) {
+    const k = aliasKey(n);
+    if (!athleteByAlias.has(k)) athleteByAlias.set(k, a);
+  }
+}
+
 const resultsByEvent = new Map<string, Result[]>();
 const resultsByAthlete = new Map<string, Result[]>();
 for (const r of results) {
@@ -83,6 +102,26 @@ export function getAthleteBySlug(slug: string): Athlete | undefined {
 }
 export function getAthleteById(id: string): Athlete | undefined {
   return athleteById.get(id);
+}
+
+/** Look a rider up by their permanent UID, including UIDs merged into them. */
+export function getAthleteByUid(uid: string): Athlete | undefined {
+  return athleteByUid.get(uid.trim().toLowerCase());
+}
+
+/**
+ * Resolve whatever identifier is to hand — UID, retired UID, URL slug or any
+ * known name spelling — to a single rider. Use this for registration lookups,
+ * where the input is typed by a person.
+ */
+export function resolveAthlete(input: string): Athlete | undefined {
+  const q = input.trim();
+  if (!q) return undefined;
+  return (
+    athleteByUid.get(q.toLowerCase()) ??
+    athleteBySlug.get(q) ??
+    athleteByAlias.get(aliasKey(q))
+  );
 }
 
 /* -------- joined rows -------- */
@@ -204,6 +243,8 @@ export function getDisciplines(): string[] {
 
 export interface AthleteSummary {
   id: string;
+  /** Permanent rider number (bbchNNNNN); null for placeholder rows. */
+  uid?: string | null;
   slug: string;
   name: string;
   team: string | null;
@@ -216,11 +257,15 @@ export interface AthleteSummary {
 
 export function getAthleteSummaries(): AthleteSummary[] {
   return athletes
+    // Start-list padding rows ("Dummy 01", "* - Dnf") are not people and must
+    // never appear in rider listings, standings or the sitemap.
+    .filter((a) => !a.placeholder)
     .map((a) => {
       const rows = resultsByAthlete.get(a.id) ?? [];
       const ranks = rows.map((r) => r.rank).filter((r): r is number => r != null);
       return {
         id: a.id,
+        uid: a.uid ?? null,
         slug: a.slug,
         name: a.name,
         team: a.team ?? null,
