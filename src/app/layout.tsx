@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { RacePromoBar } from "@/components/race-promo-bar";
 import { Footer } from "@/components/footer";
 import { IntroLoader } from "@/components/intro-loader";
 import { SiteStructuredData } from "@/components/structured-data";
@@ -131,6 +132,7 @@ export default function RootLayout({
       >
         <SiteStructuredData />
         <IntroLoader />
+        <RacePromoBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -103,12 +103,12 @@ export default function Race09Page() {
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
               <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
-              Registration open — closes 15 October
+              Race complete — results coming soon
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink href={REGISTER_URL} external variant="yellow">
-                Register now →
+              <ButtonLink href="/events/bbch26-race10" variant="yellow">
+                Next up: Nandi Epic →
               </ButtonLink>
               <ButtonLink href="#categories" variant="outlineLight">
                 Categories &amp; fees
@@ -116,7 +116,8 @@ export default function Race09Page() {
             </div>
 
             <p className="mt-4 text-xs leading-relaxed text-white/60">
-              Early bird: ₹100 off until 30 September. No spot registration on race day.
+              Race #09 was held on 18 October 2026. Results will be published here
+              once they are final.
             </p>
           </div>
         </Container>
@@ -301,14 +302,15 @@ export default function Race09Page() {
       {/* CTA */}
       <Container className="scroll-mt-20 py-12 text-center sm:py-16" id="register">
         <h2 className="font-display text-xl font-extrabold tracking-tight sm:text-2xl lg:text-3xl">
-          Entries close 15 October
+          The season finishes at Nandi
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-greige">
-          No spot registrations on race day — and ₹100 off every entry until 30 September.
+          Race #09 is done. The Nandi Epic on 20 November is the last one of the
+          season — 102 km, 50 km, or the Nandi 7.3 hill climb.
         </p>
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <ButtonLink href={REGISTER_URL} external variant="yellow">
-            Register now →
+          <ButtonLink href="/events/bbch26-race10" variant="yellow">
+            Register for the Nandi Epic →
           </ButtonLink>
           <ButtonLink href="/events" variant="outline">
             Back to all events

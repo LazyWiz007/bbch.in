@@ -26,7 +26,6 @@ export default function Home() {
   const stats = getStats();
   const recent = getRecentEvents(6);
   const upcoming = getUpcomingEvents();
-  const nextUp = upcoming[0];
   const latest = events[0];
 
   // Podium (top 3) per category for the most recent race.
@@ -53,7 +52,9 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO */}
+      {/* HERO — the season finale leads the page while entries are open.
+          The Nandi Epic artwork carries its own title, date and distances,
+          so it is shown whole rather than used as a background behind text. */}
       <section className="relative overflow-hidden bg-ink text-white">
         <div className="absolute inset-0">
           <Image
@@ -63,63 +64,73 @@ export default function Home() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[70%_center] opacity-100"
+            className="object-cover object-[70%_center]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1436] via-[#13268f]/70 to-[#1d3fcc]/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1436]/90 via-transparent to-[#0d1436]/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1436] via-[#13268f]/80 to-[#1d3fcc]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1436]/95 via-[#0d1436]/40 to-[#0d1436]/20" />
         </div>
-        <Container className="relative py-20 sm:py-28 lg:py-32">
-          <div className="max-w-3xl">
-            <p className="eyebrow text-yellow">Bangalore Bicycle Championships</p>
-            <h1 className="mt-4 font-display text-5xl font-extrabold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
-              India&apos;s longest-running
-              <br />
-              <span className="text-yellow">cycling event.</span>
-            </h1>
-            <p className="mt-3 font-script text-4xl leading-none text-yellow sm:text-5xl">
-              live to race
-            </p>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Bengaluru&apos;s home of competitive cycling since 2009. Road
-              races, MTB, time trials and more — with a decade of results and
-              rider histories, all in one place.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              {latest && (
-                <ButtonLink href={`/events/${latest.slug}`} variant="yellow">
-                  Latest results
-                </ButtonLink>
-              )}
-              <ButtonLink href="/events" variant="outlineLight">
-                Browse events
-              </ButtonLink>
-            </div>
-          </div>
 
-          {nextUp && (
-            <Link
-              href={nextUp.detailsUrl || nextUp.registrationUrl || "/events"}
-              className="gloss-dark group mt-14 flex flex-col gap-4 rounded-xl border border-line-dark p-5 transition-colors hover:border-yellow/50 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-6"
-            >
-              <div className="flex items-center gap-5">
-                <div className="stripe-yellow flex flex-col items-center rounded-lg px-3.5 py-2 text-ink">
-                  <span className="font-display text-xl font-extrabold leading-none">{dateParts(nextUp.date).day}</span>
-                  <span className="font-mono text-[0.6rem] tracking-widest">{dateParts(nextUp.date).month}</span>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="eyebrow text-yellow">Next up</span>
-                    <TypeBadge type={nextUp.discipline} className="bg-white/10 text-white/80" />
-                  </div>
-                  <p className="mt-1 font-display text-lg font-bold text-white">{nextUp.name}</p>
-                  <p className="text-sm text-white/65">{formatDate(nextUp.date)} · {nextUp.location}</p>
-                </div>
+        <Container className="relative py-8 sm:py-16 lg:py-24">
+          <div className="grid items-center gap-7 sm:gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+            {/* On phones the artwork leads: it carries the date, distances
+                and the call to action, so it should not sit below a screen
+                of text. On desktop it returns to the right-hand column. */}
+            <div className="order-2 lg:order-1">
+              <p className="eyebrow text-yellow">
+                Bangalore Bicycle Championships · Race #10
+              </p>
+              <h1 className="mt-3 font-display text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+                Nandi <span className="text-yellow">Epic</span>
+              </h1>
+              <p className="mt-2 font-script text-2xl leading-none text-yellow sm:text-4xl">
+                live to race
+              </p>
+
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 sm:mt-6 sm:text-lg">
+                The season finale, up the Nandi Hills. 102 km, 50 km, or Nandi
+                7.3 — the hill climb, raced on its own.
+              </p>
+
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-white/75 sm:mt-6 sm:gap-x-6">
+                <span className="font-semibold text-white">Friday, 20 Nov 2026</span>
+                <span>Nandi Hills, Bengaluru</span>
               </div>
-              <span className="inline-flex items-center gap-1 text-sm font-semibold text-white transition-colors group-hover:text-yellow">
-                View details <span aria-hidden="true">→</span>
-              </span>
+
+              <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+                <ButtonLink href="https://www.explara.com/e/bbch26-race10" external variant="yellow">
+                  Register now →
+                </ButtonLink>
+                <ButtonLink href="/events/bbch26-race10" variant="outlineLight">
+                  Race details
+                </ButtonLink>
+              </div>
+
+              <p className="mt-6 max-w-lg text-xs leading-relaxed text-white/55 sm:mt-7 sm:text-sm">
+                India&apos;s longest-running competitive cycling event — road
+                races, MTB and time trials in Bengaluru since 2009.{" "}
+                <Link href="/results" className="font-semibold text-white/80 underline-offset-4 hover:text-yellow hover:underline">
+                  Browse every result
+                </Link>
+                .
+              </p>
+            </div>
+
+            <Link
+              href="/events/bbch26-race10"
+              className="group relative order-1 block overflow-hidden rounded-xl border border-white/15 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-[1.015] lg:order-2"
+            >
+              <Image
+                src="/covers/BBCh26Race10_NandiEpic_Portrait.jpg"
+                alt="Nandi Epic — 20 November 2026, Nandi Hills, Bengaluru. 102 km, 50 km and the Nandi 7.3 hill climb."
+                width={1600}
+                height={2000}
+                priority
+                unoptimized
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="h-auto w-full"
+              />
             </Link>
-          )}
+          </div>
         </Container>
         <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2.5" />
       </section>

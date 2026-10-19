@@ -21,7 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/events", priority: 0.9, changeFrequency: "weekly" },
     { path: "/season-calendar", priority: 0.9, changeFrequency: "weekly" },
     // Upcoming race landing pages — high priority while registration is open.
-    { path: "/events/bbch26-race09", priority: 0.9, changeFrequency: "daily" },
+    { path: "/events/bbch26-race10", priority: 0.95, changeFrequency: "daily" },
+    { path: "/events/bbch26-race09", priority: 0.6, changeFrequency: "monthly" },
     { path: "/events/bbch26-race08", priority: 0.6, changeFrequency: "monthly" },
     { path: "/events/bbch26-race07", priority: 0.6, changeFrequency: "monthly" },
     { path: "/results", priority: 0.8, changeFrequency: "weekly" },
