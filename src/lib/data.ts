@@ -292,6 +292,13 @@ export interface AthleteStanding {
   podiums: number;
 }
 
+/**
+ * Categories that are not cycling. Race #09 pairs an MTB XC race with a trail
+ * run; the run's results are published on the race page, but its finishers do
+ * not score in a cycling championship, so they are kept out of standings.
+ */
+const NON_CYCLING_CATEGORIES = new Set(["Trail Run"]);
+
 export function getTopAthletes(season?: number): AthleteStanding[] {
   const byAthlete = new Map<
     string,
@@ -300,6 +307,7 @@ export function getTopAthletes(season?: number): AthleteStanding[] {
 
   for (const r of results) {
     if (r.rank == null) continue;
+    if (NON_CYCLING_CATEGORIES.has(r.category)) continue;
 
     if (season != null) {
       const event = eventById.get(r.eventId);

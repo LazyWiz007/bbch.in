@@ -26,6 +26,10 @@ _m("U11","U11 Open","U11 Boys","XC - U11")
 _m("U10","U-10","U10","U10 - Boys","U10 - Girls")
 _m("U09","U-09","U-09 Open")
 _m("U-06 (FUN RIDE)","Kids","Kids Open")
+# Race #09 is a dual event: an MTB XC race and a trail run on the same day.
+# The run is kept as its own category so its results can be shown, and is
+# excluded from cycling season standings in the site's data layer.
+_m("Trail Run","Trail Run")
 
 # tabs we never import as results
 EXCLUDE = set(x.lower() for x in [
@@ -342,6 +346,21 @@ for r in results:
     r["athleteId"]=final_ath[r["athleteKey"]]["id"]
     del r["athleteKey"]
 
+# Timing sheets pad start lists with placeholder entries ("ZE Dummy 01",
+# "* - Dnf"). They are not people and must not be published as finishers, so
+# their rows are dropped and each event's count is recomputed from what is
+# actually left.
+placeholder_ids={a["id"] for a in final_ath.values() if a.get("placeholder")}
+before=len(results)
+results=[r for r in results if r["athleteId"] not in placeholder_ids]
+dropped=before-len(results)
+if dropped:
+    print(f"dropped {dropped} placeholder result row(s) from "
+          f"{len({r for r in placeholder_ids})} padding entries")
+_rc=Counter(r["eventId"] for r in results)
+for e in events:
+    e["resultCount"]=_rc.get(e["id"],0)
+
 events=[e for e in events if e["resultCount"]>0]
 good_ids=set(e["id"] for e in events)
 results=[r for r in results if r["eventId"] in good_ids]
@@ -350,6 +369,9 @@ results=[r for r in results if r["eventId"] in good_ids]
 seen_ids=set(); athletes_out=[]
 for a in final_ath.values():
     if a["id"] in seen_ids: continue
+    # Padding entries have had their rows dropped above, so nothing refers to
+    # them any more and they do not belong in the rider list.
+    if a.get("placeholder"): continue
     seen_ids.add(a["id"]); athletes_out.append(a)
 athletes_out.sort(key=lambda a: (a["name"] or "").casefold())
 json.dump(athletes_out, open(os.path.join(OUT,"athletes.json"),"w"), ensure_ascii=False, indent=0)

@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "note": "Permanent rider identities. A UID is assigned once and never reused or changed. 'aliases' are other spellings that resolve to this rider; 'retiredUids' are UIDs merged into this one.",
- "nextUid": "bbch03148",
+ "nextUid": "bbch03170",
  "athletes": [
   {
    "uid": "bbch00007",
@@ -23283,6 +23283,182 @@
   {
    "uid": "bbch03147",
    "name": "Zubin rebelo",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03148",
+   "name": "Nibhish R",
+   "gender": "M",
+   "team": "HAMMERDOWN COACHING",
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03149",
+   "name": "Tarunkishwor Yumnam",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03150",
+   "name": "Rahul Gowda",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03151",
+   "name": "Venkataramanan Rajmohan",
+   "gender": "M",
+   "team": "WTF",
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03152",
+   "name": "Kartik Cariapa",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03153",
+   "name": "Supreeth Kumar",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03154",
+   "name": "Vyshak A M",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03155",
+   "name": "Suraj Kumar",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03156",
+   "name": "Anbarasu Krishnan",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03157",
+   "name": "Aakar Gupta",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03158",
+   "name": "Monish Chhabria",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03159",
+   "name": "Sonu Somapalan",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03160",
+   "name": "Yohaan Sarda",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03161",
+   "name": "Rihaan Vijayan",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03162",
+   "name": "Vishak Yudhan RT",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03163",
+   "name": "Achyuth Balapuram",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03164",
+   "name": "Alvyra Baruah",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03165",
+   "name": "Kaviya Sri",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03166",
+   "name": "Prajwal B A",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03167",
+   "name": "Pavan Kumar",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03168",
+   "name": "Nagaraja P",
+   "gender": "M",
+   "team": null,
+   "aliases": [],
+   "retiredUids": []
+  },
+  {
+   "uid": "bbch03169",
+   "name": "Thejus P",
    "gender": "M",
    "team": null,
    "aliases": [],

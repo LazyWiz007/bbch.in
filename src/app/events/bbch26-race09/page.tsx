@@ -4,8 +4,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { RaceStructuredData, Breadcrumbs } from "@/components/structured-data";
+import { EventResults } from "@/components/event-results";
+import { getEventBySlug, getResultsForEvent } from "@/lib/data";
 
 const REGISTER_URL = "https://www.explara.com/e/bbch26-race09";
+const EVENT_SLUG = "2026-race-09-xc";
 const FB_EVENT_URL = "https://www.facebook.com/events/1777720650210607/";
 const VENUE_MAP_URL = "https://goo.gl/maps/gqvZvtromXVbGxyV9";
 
@@ -48,7 +51,11 @@ const rules = [
   "Registration tickets are non-refundable and non-transferable.",
 ];
 
-export default function Race09Page() {
+export default async function Race09Page() {
+  const event = await getEventBySlug(EVENT_SLUG);
+  const results = event ? await getResultsForEvent(event.id) : [];
+  const raceCategories = [...new Set(results.map((r) => r.category))].sort();
+
   return (
     <>
       <RaceStructuredData
@@ -60,7 +67,7 @@ export default function Race09Page() {
         description="MTB cross-country racing and a 10 km trail run at Avathi, Nandi Hill Road. Elite, Amateur, Women, U-18, U-16, U-11 and kids categories."
         image={POSTER}
         registrationUrl={REGISTER_URL}
-        status="scheduled"
+        status="completed"
       />
       <Breadcrumbs
         items={[
@@ -103,26 +110,59 @@ export default function Race09Page() {
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
               <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
-              Race complete — results coming soon
+              Race complete — results published
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink href="/events/bbch26-race10" variant="yellow">
-                Next up: Nandi Epic →
+              <ButtonLink href="#results" variant="yellow">
+                View results
               </ButtonLink>
-              <ButtonLink href="#categories" variant="outlineLight">
-                Categories &amp; fees
+              <ButtonLink href="/events/bbch26-race10" variant="outlineLight">
+                Next up: Nandi Epic →
               </ButtonLink>
             </div>
 
             <p className="mt-4 text-xs leading-relaxed text-white/60">
-              Race #09 was held on 18 October 2026. Results will be published here
-              once they are final.
+              Race #09 was held on Sunday 18 October 2026 at Avathi.
             </p>
           </div>
         </Container>
         <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
       </section>
+
+      {/* RESULTS */}
+      <Container className="scroll-mt-20 py-12 sm:py-16" id="results">
+        <p className="eyebrow text-ember">Official results</p>
+        <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
+          Race #09 results
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-greige">
+          MTB XC Race &amp; Trail Run · 18 October 2026 · Avathi, Nandi Hill Road
+          {results.length > 0 && ` · ${results.length} finishers`}
+        </p>
+
+        {results.length === 0 ? (
+          <div className="mt-8 rounded-xl border border-line bg-cream p-10 text-center">
+            <p className="font-display text-lg font-bold text-ink">Results coming soon</p>
+            <p className="mt-2 text-sm text-greige">
+              Results are being processed. Check back shortly or{" "}
+              <Link href="/results" className="font-semibold text-ember hover:underline">
+                search the full archive
+              </Link>
+              .
+            </p>
+          </div>
+        ) : (
+          <div className="mt-6">
+            <EventResults categories={raceCategories} results={results} />
+            <p className="mt-6 text-xs leading-relaxed text-greige">
+              Trail Run results are listed alongside the race categories. The run
+              is scored separately and does not count towards the cycling season
+              standings.
+            </p>
+          </div>
+        )}
+      </Container>
 
       {/* QUICK FACTS */}
       <section className="border-b border-line bg-paper py-8 sm:py-10">
