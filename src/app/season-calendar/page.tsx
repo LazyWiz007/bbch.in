@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { getEvents } from "@/lib/data";
+import { getUpcomingEvents } from "@/lib/upcoming";
 
 export const metadata: Metadata = {
   title: "Season 2026 — Race Calendar & Standings",
@@ -30,7 +32,53 @@ interface Race {
   registrationUrl?: string;
 }
 
-const RACES: Race[] = [
+const SEASON = 2026;
+
+/* Races with a dedicated page on this site. Everything else falls back to
+   its generated event page once results exist. */
+const RACE_PAGES: Record<number, string> = {
+  6: "/events/bbch26-race06",
+  7: "/events/bbch26-race07",
+  8: "/events/bbch26-race08",
+  9: "/events/bbch26-race09",
+  10: "/events/bbch26-race10",
+};
+
+/**
+ * Fill in each race's status and links from the data we already hold, rather
+ * than from fields edited by hand. A race with imported results is complete
+ * and links to them; the next race still open for entry is marked "next" and
+ * carries its registration link. Previously these were typed into the list
+ * below and went stale — Race #07 still read "next" two months after it was
+ * run, and #08 and #09 showed as upcoming with results already published.
+ */
+function resolveRaces(races: Race[]): Race[] {
+  const events = getEvents().filter((e) => e.year === SEASON);
+  const upcoming = getUpcomingEvents();
+  const nextRaceNo = upcoming.length
+    ? Number(/race(\d+)/.exec(upcoming[0].id)?.[1] ?? NaN)
+    : NaN;
+
+  return races.map((race) => {
+    const event = events.find((e) => e.raceNo === race.raceNo);
+    const hasResults = !!event && event.resultCount > 0;
+    const open = upcoming.find(
+      (u) => Number(/race(\d+)/.exec(u.id)?.[1] ?? NaN) === race.raceNo
+    );
+
+    const detailsUrl =
+      RACE_PAGES[race.raceNo] ?? (hasResults ? `/events/${event!.id}` : undefined);
+
+    return {
+      ...race,
+      status: hasResults ? "completed" : race.raceNo === nextRaceNo ? "next" : "upcoming",
+      detailsUrl,
+      registrationUrl: open?.registrationUrl ?? (hasResults ? undefined : race.registrationUrl),
+    };
+  });
+}
+
+const RACES_RAW: Race[] = [
   {
     id: "race01",
     raceNo: 1,
@@ -396,6 +444,7 @@ function RaceCard({ race }: { race: Race }) {
 }
 
 export default function SeasonCalendarPage() {
+  const RACES = resolveRaces(RACES_RAW);
   const completedCount = RACES.filter((r) => r.status === "completed").length;
   const upcomingCount = RACES.filter((r) => r.status !== "completed").length;
 

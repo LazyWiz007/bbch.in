@@ -308,6 +308,9 @@ export function getTopAthletes(season?: number): AthleteStanding[] {
   for (const r of results) {
     if (r.rank == null) continue;
     if (NON_CYCLING_CATEGORIES.has(r.category)) continue;
+    // Finishers whose name was never captured are shown in race results but
+    // cannot be credited to a rider, so they score nothing.
+    if (athleteById.get(r.athleteId)?.placeholder) continue;
 
     if (season != null) {
       const event = eventById.get(r.eventId);

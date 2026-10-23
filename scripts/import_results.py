@@ -350,13 +350,27 @@ for r in results:
 # "* - Dnf"). They are not people and must not be published as finishers, so
 # their rows are dropped and each event's count is recomputed from what is
 # actually left.
+# Timing sheets label some entries with a placeholder instead of a name
+# ("ZE Dummy 01"). Two different things hide behind that label:
+#   * padding with no finish time — a start-list slot nobody rode. Drop it.
+#   * a row with real lap splits and a total — somebody genuinely rode and
+#     finished, and only their name is missing. Keep the result, because
+#     dropping it removes a finisher and shortens the field behind them.
 placeholder_ids={a["id"] for a in final_ath.values() if a.get("placeholder")}
 before=len(results)
-results=[r for r in results if r["athleteId"] not in placeholder_ids]
+results=[r for r in results
+         if r["athleteId"] not in placeholder_ids or r["timeSeconds"] is not None]
 dropped=before-len(results)
+kept_ids={r["athleteId"] for r in results if r["athleteId"] in placeholder_ids}
+for a in final_ath.values():
+    if a["id"] in kept_ids:
+        # Say plainly that the name is missing rather than publishing the
+        # timing company's internal label. The bib stays on the result row.
+        a["name"]="Unknown rider"
+        a["aliases"]=[]
 if dropped:
-    print(f"dropped {dropped} placeholder result row(s) from "
-          f"{len({r for r in placeholder_ids})} padding entries")
+    print(f"dropped {dropped} unridden padding row(s); kept "
+          f"{len(kept_ids)} unnamed finisher(s) with real times")
 _rc=Counter(r["eventId"] for r in results)
 for e in events:
     e["resultCount"]=_rc.get(e["id"],0)
@@ -369,9 +383,10 @@ results=[r for r in results if r["eventId"] in good_ids]
 seen_ids=set(); athletes_out=[]
 for a in final_ath.values():
     if a["id"] in seen_ids: continue
-    # Padding entries have had their rows dropped above, so nothing refers to
-    # them any more and they do not belong in the rider list.
-    if a.get("placeholder"): continue
+    # Padding with no result is gone; an unnamed finisher still has rows and
+    # must stay so the results table can render them. They keep the
+    # placeholder flag, which keeps them out of rider listings and standings.
+    if a.get("placeholder") and a["id"] not in kept_ids: continue
     seen_ids.add(a["id"]); athletes_out.append(a)
 athletes_out.sort(key=lambda a: (a["name"] or "").casefold())
 json.dump(athletes_out, open(os.path.join(OUT,"athletes.json"),"w"), ensure_ascii=False, indent=0)

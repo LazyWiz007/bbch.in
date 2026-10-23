@@ -33443,6 +33443,17 @@
 "eventId": "2021-jan-itt",
 "category": "Amateur",
 "discipline": "ITT",
+"rank": 7,
+"status": null,
+"timeSeconds": 3167.81,
+"rawTime": "52:47.81",
+"bib": 58,
+"athleteId": "x-za-dummy-01"
+},
+{
+"eventId": "2021-jan-itt",
+"category": "Amateur",
+"discipline": "ITT",
 "rank": 8,
 "status": null,
 "timeSeconds": 3180.07,
@@ -37755,6 +37766,17 @@
 "eventId": "2021-race-03-xc",
 "category": "Amateur",
 "discipline": "MTB (XC)",
+"rank": 7,
+"status": null,
+"timeSeconds": 3167.81,
+"rawTime": "52:47.81",
+"bib": 58,
+"athleteId": "x-za-dummy-01"
+},
+{
+"eventId": "2021-race-03-xc",
+"category": "Amateur",
+"discipline": "MTB (XC)",
 "rank": 8,
 "status": null,
 "timeSeconds": 3180.07,
@@ -40285,6 +40307,17 @@
 "eventId": "2022-race-01-xc",
 "category": "U16",
 "discipline": "MTB (XC)",
+"rank": 5,
+"status": null,
+"timeSeconds": 1193.76,
+"rawTime": "19:53.76",
+"bib": 406,
+"athleteId": "x-zu16-dummy-1"
+},
+{
+"eventId": "2022-race-01-xc",
+"category": "U16",
+"discipline": "MTB (XC)",
 "rank": 6,
 "status": null,
 "timeSeconds": 1401.0,
@@ -42067,6 +42100,17 @@
 "eventId": "2022-race-03-xc",
 "category": "U11",
 "discipline": "MTB (XC)",
+"rank": 6,
+"status": null,
+"timeSeconds": 1357.61,
+"rawTime": "22:37.61",
+"bib": 409,
+"athleteId": "x-zk-dummy-01"
+},
+{
+"eventId": "2022-race-03-xc",
+"category": "U11",
+"discipline": "MTB (XC)",
 "rank": 7,
 "status": null,
 "timeSeconds": 1427.05,
@@ -42300,6 +42344,17 @@
 "discipline": "MTB (XC)",
 "rank": null,
 "status": "DNF",
+"timeSeconds": 1636.48,
+"rawTime": "27:16.48",
+"bib": 32,
+"athleteId": "x-za-dummy-1"
+},
+{
+"eventId": "2022-race-03-xc",
+"category": "U11",
+"discipline": "MTB (XC)",
+"rank": null,
+"status": "DNF",
 "timeSeconds": null,
 "rawTime": "-",
 "bib": 16,
@@ -42370,6 +42425,17 @@
 "rawTime": "44:24.25",
 "bib": 308,
 "athleteId": "bbch00167"
+},
+{
+"eventId": "2022-race-03-xc",
+"category": "U18",
+"discipline": "MTB (XC)",
+"rank": 5,
+"status": null,
+"timeSeconds": 3434.35,
+"rawTime": "57:14.35",
+"bib": 309,
+"athleteId": "x-zm-dummy-01"
 },
 {
 "eventId": "2022-race-03-xc",
@@ -45224,6 +45290,17 @@
 "eventId": "2022-race-06-blr-classic",
 "category": "Amateur",
 "discipline": "Road Race",
+"rank": 26,
+"status": null,
+"timeSeconds": 11655.07,
+"rawTime": "3:14:15.07",
+"bib": 76,
+"athleteId": "x-za-dummy-02"
+},
+{
+"eventId": "2022-race-06-blr-classic",
+"category": "Amateur",
+"discipline": "Road Race",
 "rank": 27,
 "status": null,
 "timeSeconds": 11857.6,
@@ -45296,6 +45373,17 @@
 "rawTime": "3:22:59.53",
 "bib": 36,
 "athleteId": "bbch01126"
+},
+{
+"eventId": "2022-race-06-blr-classic",
+"category": "Amateur",
+"discipline": "Road Race",
+"rank": 34,
+"status": null,
+"timeSeconds": 12252.93,
+"rawTime": "3:24:12.93",
+"bib": 75,
+"athleteId": "x-za-dummy-01"
 },
 {
 "eventId": "2022-race-06-blr-classic",
@@ -46082,6 +46170,17 @@
 "eventId": "2022-race-06-blr-classic",
 "category": "U18",
 "discipline": "Road Race",
+"rank": 7,
+"status": null,
+"timeSeconds": 10331.86,
+"rawTime": "2:52:11.86",
+"bib": 421,
+"athleteId": "x-zu-dummy-01"
+},
+{
+"eventId": "2022-race-06-blr-classic",
+"category": "U18",
+"discipline": "Road Race",
 "rank": 8,
 "status": null,
 "timeSeconds": 10841.85,
@@ -46401,6 +46500,17 @@
 "eventId": "2022-race-06-blr-classic",
 "category": "Pioneer",
 "discipline": "Road Race",
+"rank": 10,
+"status": null,
+"timeSeconds": 7412.04,
+"rawTime": "2:03:32.04",
+"bib": 536,
+"athleteId": "x-zp-dummy-01"
+},
+{
+"eventId": "2022-race-06-blr-classic",
+"category": "Pioneer",
+"discipline": "Road Race",
 "rank": 11,
 "status": null,
 "timeSeconds": 7454.7,
@@ -46550,6 +46660,17 @@
 "rawTime": "-",
 "bib": 535,
 "athleteId": "bbch02940"
+},
+{
+"eventId": "2022-race-06-blr-classic",
+"category": "Pioneer",
+"discipline": "Road Race",
+"rank": null,
+"status": "***",
+"timeSeconds": 10993.52,
+"rawTime": "3:03:13.52",
+"bib": 512,
+"athleteId": "x-zn-dummy-03"
 },
 {
 "eventId": "2022-race-07-xc",
@@ -52110,6 +52231,17 @@
 "eventId": "2023-race-04-hassan-express",
 "category": "Amateur",
 "discipline": "Road Race",
+"rank": 46,
+"status": null,
+"timeSeconds": 8911.77,
+"rawTime": "2:28:31.77",
+"bib": 93,
+"athleteId": "x-za-dummy-01"
+},
+{
+"eventId": "2023-race-04-hassan-express",
+"category": "Amateur",
+"discipline": "Road Race",
 "rank": null,
 "status": "DNF",
 "timeSeconds": null,
@@ -55553,6 +55685,17 @@
 "eventId": "2023-race-07-xc",
 "category": "Open",
 "discipline": "MTB (XC)",
+"rank": 5,
+"status": null,
+"timeSeconds": 4064.38,
+"rawTime": "1:07:44.38",
+"bib": 244,
+"athleteId": "x-zm-dummy-01"
+},
+{
+"eventId": "2023-race-07-xc",
+"category": "Open",
+"discipline": "MTB (XC)",
 "rank": 6,
 "status": null,
 "timeSeconds": 4080.9,
@@ -57022,6 +57165,17 @@
 "rawTime": "0:16:12.36",
 "bib": 502,
 "athleteId": "bbch00157"
+},
+{
+"eventId": "2023-race-09-xc",
+"category": "Open",
+"discipline": "MTB (XC)",
+"rank": 6,
+"status": null,
+"timeSeconds": 973.09,
+"rawTime": "0:16:13.09",
+"bib": 515,
+"athleteId": "x-zu11-dummy-01"
 },
 {
 "eventId": "2023-race-09-xc",
@@ -66773,6 +66927,17 @@
 "eventId": "2025-race-02-namma-itt",
 "category": "Elite",
 "discipline": "ITT",
+"rank": 8,
+"status": null,
+"timeSeconds": 2817.14,
+"rawTime": "46:57.14",
+"bib": 225,
+"athleteId": "x-ze-dummy-01"
+},
+{
+"eventId": "2025-race-02-namma-itt",
+"category": "Elite",
+"discipline": "ITT",
 "rank": 9,
 "status": null,
 "timeSeconds": 2943.51,
@@ -67406,6 +67571,17 @@
 "rawTime": "1:00:56.98",
 "bib": 410,
 "athleteId": "bbch01590"
+},
+{
+"eventId": "2025-race-02-namma-itt",
+"category": "U18",
+"discipline": "ITT",
+"rank": 9,
+"status": null,
+"timeSeconds": 3744.77,
+"rawTime": "1:02:24.77",
+"bib": 414,
+"athleteId": "x-zu-dummy-01"
 },
 {
 "eventId": "2025-race-02-namma-itt",
@@ -69853,6 +70029,17 @@
 "eventId": "2025-race-06-blr-classic",
 "category": "Amateur",
 "discipline": "Road Race",
+"rank": 4,
+"status": null,
+"timeSeconds": 7909.09,
+"rawTime": "2:11:49.09",
+"bib": 103,
+"athleteId": "x-za-dummy-01"
+},
+{
+"eventId": "2025-race-06-blr-classic",
+"category": "Amateur",
+"discipline": "Road Race",
 "rank": 5,
 "status": null,
 "timeSeconds": 7915.22,
@@ -70062,6 +70249,17 @@
 "eventId": "2025-race-06-blr-classic",
 "category": "Amateur",
 "discipline": "Road Race",
+"rank": 24,
+"status": null,
+"timeSeconds": 9988.68,
+"rawTime": "2:46:28.68",
+"bib": 107,
+"athleteId": "x-za-dummy-04"
+},
+{
+"eventId": "2025-race-06-blr-classic",
+"category": "Amateur",
+"discipline": "Road Race",
 "rank": 25,
 "status": null,
 "timeSeconds": 9991.45,
@@ -70090,6 +70288,17 @@
 "rawTime": "2:50:30.55",
 "bib": 94,
 "athleteId": "bbch02301"
+},
+{
+"eventId": "2025-race-06-blr-classic",
+"category": "Amateur",
+"discipline": "Road Race",
+"rank": 28,
+"status": null,
+"timeSeconds": 10309.99,
+"rawTime": "2:51:49.99",
+"bib": 104,
+"athleteId": "x-za-dummy-02"
 },
 {
 "eventId": "2025-race-06-blr-classic",
@@ -71322,6 +71531,17 @@
 "rawTime": "8:49.23",
 "bib": 421,
 "athleteId": "bbch03007"
+},
+{
+"eventId": "2025-race-09-xc-trail-run",
+"category": "U12",
+"discipline": "MTB (XC)",
+"rank": 5,
+"status": null,
+"timeSeconds": 755.3,
+"rawTime": "12:35.30",
+"bib": 424,
+"athleteId": "x-zu12-dummy-02"
 },
 {
 "eventId": "2025-race-09-xc-trail-run",
@@ -73681,12 +73901,45 @@
 "eventId": "2026-race-02-namma-itt",
 "category": "U18",
 "discipline": "ITT",
+"rank": 7,
+"status": null,
+"timeSeconds": 3757.28,
+"rawTime": "1:02:37.28",
+"bib": 426,
+"athleteId": "x-zu-dummy-02"
+},
+{
+"eventId": "2026-race-02-namma-itt",
+"category": "U18",
+"discipline": "ITT",
+"rank": 8,
+"status": null,
+"timeSeconds": 3818.99,
+"rawTime": "1:03:38.99",
+"bib": 425,
+"athleteId": "x-zu-dummy-01"
+},
+{
+"eventId": "2026-race-02-namma-itt",
+"category": "U18",
+"discipline": "ITT",
 "rank": 9,
 "status": null,
 "timeSeconds": 3965.01,
 "rawTime": "1:06:05.01",
 "bib": 410,
 "athleteId": "bbch01731"
+},
+{
+"eventId": "2026-race-02-namma-itt",
+"category": "U18",
+"discipline": "ITT",
+"rank": 10,
+"status": null,
+"timeSeconds": 4093.55,
+"rawTime": "1:08:13.55",
+"bib": 427,
+"athleteId": "x-zu-dummy-03"
 },
 {
 "eventId": "2026-race-02-namma-itt",
@@ -77663,6 +77916,17 @@
 "eventId": "2026-race-06-bangalore-classic-road-race",
 "category": "Amateur",
 "discipline": "Road Race",
+"rank": 73,
+"status": null,
+"timeSeconds": 13997.56,
+"rawTime": "3:53:17.56",
+"bib": 141,
+"athleteId": "x-za-dummy-01"
+},
+{
+"eventId": "2026-race-06-bangalore-classic-road-race",
+"category": "Amateur",
+"discipline": "Road Race",
 "rank": 74,
 "status": null,
 "timeSeconds": 14306.96,
@@ -78901,6 +79165,17 @@
 "rawTime": "1:32:16.77",
 "bib": 233,
 "athleteId": "bbch03148"
+},
+{
+"eventId": "2026-race-09-xc",
+"category": "Elite",
+"discipline": "MTB (XC)",
+"rank": 9,
+"status": null,
+"timeSeconds": 5637.42,
+"rawTime": "1:33:57.42",
+"bib": 247,
+"athleteId": "x-ze-dummy-01"
 },
 {
 "eventId": "2026-race-09-xc",

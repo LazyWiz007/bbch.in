@@ -6,6 +6,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { RaceStructuredData, Breadcrumbs } from "@/components/structured-data";
 
 const REGISTER_URL = "https://www.explara.com/e/bbch26-race10";
+const FB_EVENT_URL = "https://www.facebook.com/events/2314315445682888/";
+const START_MAP_URL = "https://maps.app.goo.gl/VBvrij2BY3ay4we77";
 
 /* Official Nandi Epic artwork. Both crops carry baked-in text in the
    corners, so they are always rendered uncropped: the wide one on desktop,
@@ -17,7 +19,7 @@ const POSTER_TALL = "/covers/BBCh26Race10_NandiEpic_Portrait.jpg";
 export const metadata: Metadata = {
   title: "Nandi Epic — Race #10 · 102 km & 50 km Road Race · 20 Nov 2026",
   description:
-    "Register for the Nandi Epic, BBCh 2026's season finale — Friday 20 November 2026 at Nandi Hills, Bengaluru. 102 km for Elite and Men Masters, 50 km for Women, Amateur, Non-Road and Women Masters, plus Nandi 7.3, the hill climb experience.",
+    "Register for the Nandi Epic, BBCh 2026's season finale — Friday 20 November 2026 at Nandi Hills, Bengaluru. 102 km for Elite and Men Master, 50 km for Amateur, Women, Non-Road Bike and Women Master, and Nandi 7.3, the hill climb. Entry ₹1,499 (₹599 for Nandi 7.3). Entries close 18 November.",
   keywords: [
     "Nandi Epic",
     "Nandi Hills cycling race",
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Nandi Epic — BBCh26 Race #10 · 20 Nov 2026",
     description:
-      "The season finale at Nandi Hills. 102 km, 50 km, and Nandi 7.3 — the hill climb experience. Registrations open.",
+      "The season finale at Nandi Hills. 102 km, 50 km, and Nandi 7.3 — the hill climb. Entries close 18 November, no spot registration.",
     images: [
       { url: POSTER_WIDE, width: 1963, height: 1126, alt: "Nandi Epic — 20 November 2026, Nandi Hills, Bengaluru" },
     ],
@@ -43,23 +45,46 @@ export const metadata: Metadata = {
 const distances = [
   {
     km: "102 KM",
-    who: "Elite · Men Masters",
+    who: "Elite · Men Master (40+)",
+    fee: "₹1,499",
+    starts: "Elite 6:40 AM · Men Master 6:50 AM",
     blurb:
-      "The full Nandi Epic. The longest road race on the BBCh calendar and the one the season is measured by.",
+      "The full Nandi Epic, and the longest road race on the BBCh calendar.",
     featured: true,
   },
   {
     km: "50 KM",
-    who: "Women · Amateur · Non-Road · Women Masters",
+    who: "Amateur · Women · Non-Road Bike · Women Master (40+) · U-18",
+    fee: "₹1,499",
+    starts: "Amateur 8:00 AM · Women 8:03 AM · Non-Road Bike 8:06 AM",
     blurb:
       "The same roads, half the distance — the way into the Epic for riders stepping up to a long race.",
   },
   {
     km: "Nandi 7.3",
-    who: "The hill climb experience",
+    who: "Open to all riders",
+    fee: "₹599",
+    starts: "The hill climb experience",
     blurb:
-      "The 7.3 km climb to the top of Nandi Hills, raced on its own. One effort, one time, nowhere to hide.",
+      "The legendary 7.3 km climb to the top of Nandi Hills, ridden on its own.",
   },
+];
+
+const facts = [
+  { k: "Reporting", v: "6:00 AM", sub: "Or 50 min before your start" },
+  { k: "First start", v: "6:40 AM", sub: "Elite, 102 km" },
+  { k: "Start point", v: "STRR–Hyd Cross", sub: "Nitesh Layout, Nandi Hill Rd" },
+  { k: "Podium", v: "Nandi Hill Base", sub: "After the final finisher" },
+];
+
+const rules = [
+  "Entries close Wednesday 18 November at 11:59 PM. There is no spot registration on race day.",
+  "Entries are non-refundable and non-transferable.",
+  "Elite is open to any man who wants to race, but it is where the professionals ride — enter it only with real racing experience. Anyone who has represented a state or UT must race Elite.",
+  "Men Master (40+) and Women Master (40+) each need at least 10 riders on the day. Below that, Master merges into Elite, and Women Master into Women, sharing one podium.",
+  "Once you race Elite, Men Master or Women Master, you stay in that category for the rest of the season.",
+  "Non-Road Bike is for hybrids, MTBs and foldies. Fixies and single-speeds are not allowed and should enter another category.",
+  "Bib numbers must be displayed on the handlebars, uncut and unaltered.",
 ];
 
 export default function Race10Page() {
@@ -129,7 +154,7 @@ export default function Race10Page() {
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-yellow/40 bg-yellow/10 px-4 py-2 text-sm font-semibold text-yellow">
               <span className="h-2 w-2 shrink-0 rounded-full bg-yellow" />
-              Registrations open
+              Registrations open — entries close 18 November
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -143,6 +168,23 @@ export default function Race10Page() {
           </div>
         </Container>
         <div className="stripe-warm absolute bottom-0 left-0 right-0 h-2" />
+      </section>
+
+      {/* QUICK FACTS */}
+      <section className="border-b border-line bg-paper py-8 sm:py-10">
+        <Container className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 sm:gap-6">
+          {facts.map((f) => (
+            <div key={f.k}>
+              <p className="font-mono text-[0.65rem] uppercase tracking-widest text-greige">
+                {f.k}
+              </p>
+              <p className="mt-1 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+                {f.v}
+              </p>
+              <p className="mt-0.5 text-xs text-greige">{f.sub}</p>
+            </div>
+          ))}
+        </Container>
       </section>
 
       {/* DISTANCES */}
@@ -180,8 +222,78 @@ export default function Race10Page() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-greige">
                   {d.blurb}
                 </p>
+                <dl className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <dt className="text-greige">Entry</dt>
+                    <dd className="font-display font-bold text-ink">{d.fee}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <dt className="shrink-0 text-greige">Start</dt>
+                    <dd className="text-right text-xs text-greige">{d.starts}</dd>
+                  </div>
+                </dl>
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* START POINT */}
+      <section className="border-y border-line bg-cream py-14 sm:py-16">
+        <Container className="grid gap-10 lg:grid-cols-2">
+          <div>
+            <p className="eyebrow text-ember">Getting there</p>
+            <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
+              Start &amp; finish
+            </h2>
+            <dl className="mt-6 space-y-4 text-sm">
+              <div>
+                <dt className="font-semibold text-ink">Registration and start</dt>
+                <dd className="mt-1 text-greige">
+                  Near STRR–Hyd Cross, Nitesh Layout, Nandi Hill Road
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Route</dt>
+                <dd className="mt-1 text-greige">
+                  NH-7 Bangalore–Hyderabad Highway, out to Nandi Hill
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Podium</dt>
+                <dd className="mt-1 text-greige">At Nandi Hill base</dd>
+              </div>
+            </dl>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ButtonLink href={START_MAP_URL} external variant="outline" size="sm">
+                Open start point in Maps
+              </ButtonLink>
+              <ButtonLink href={FB_EVENT_URL} external variant="outline" size="sm">
+                Facebook event
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div>
+            <p className="eyebrow text-ember">Before you enter</p>
+            <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
+              Race rules
+            </h2>
+            <ul className="mt-6 space-y-3">
+              {rules.map((r) => (
+                <li key={r} className="flex gap-3 text-sm leading-relaxed text-greige">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-crimson" />
+                  <span>{r}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-xs text-greige">
+              These sit alongside the{" "}
+              <Link href="/rules-and-regulations" className="font-semibold text-ember hover:underline">
+                full BBCh rules and regulations
+              </Link>
+              .
+            </p>
           </div>
         </Container>
       </section>

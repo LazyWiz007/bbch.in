@@ -5,6 +5,13 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   {
+    id: "race-10",
+    label: "Nandi Epic (Race #10)",
+    title: "BBCh26 Race #10 | Nandi Epic | 20th November 2026",
+    iframeUrl: "https://in.explara.com/em/event/attendee/attendee-list-widget/eid/641671",
+    height: 650,
+  },
+  {
     id: "race-09",
     label: "Race #09 (MTB XC & Trail Run)",
     title: "BBCh26 Race #09 | MTB XC RACE & TRAIL RUN | 18th October 2026",
