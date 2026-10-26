@@ -62,4 +62,10 @@ export interface Result {
   timeSeconds: number | null;
   rawTime: string;
   bib: number | null;
+  /**
+   * The team the rider raced for on the day. Riders move between teams, so
+   * results keep their own team rather than borrowing the rider's current
+   * one. Null where the sheet recorded no team.
+   */
+  team?: string | null;
 }

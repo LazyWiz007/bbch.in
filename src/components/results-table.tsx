@@ -89,7 +89,7 @@ export function ResultsTable({
                   {r.event.name}
                 </Link>
               ) : (
-                <span className="truncate text-sm text-greige">{r.athlete.team ?? "—"}</span>
+                <span className="truncate text-sm text-greige">{r.team ?? r.athlete.team ?? "—"}</span>
               )}
               <span className="text-sm text-greige">{r.category}</span>
               <span className="text-right font-mono text-sm text-ink">
@@ -108,7 +108,7 @@ export function ResultsTable({
                   {r.athlete.name}
                 </Link>
                 <span className="block truncate text-xs text-greige">
-                  {showEvent ? r.event.name : r.athlete.team ?? "Independent"} · {r.category}
+                  {showEvent ? r.event.name : r.team ?? r.athlete.team ?? "Independent"} · {r.category}
                 </span>
               </div>
               <span className="font-mono text-sm text-ink">

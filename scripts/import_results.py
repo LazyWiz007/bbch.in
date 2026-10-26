@@ -237,6 +237,10 @@ for year in sorted(os.listdir(BASE)):
                     "rank":rank,"status":None if rank else rstatus,
                     "timeSeconds":round(secs,2) if secs is not None else None,
                     "rawTime":raw or (str(tval) if tval is not None else ""),"bib":bibn,
+                    # Who they rode for on the day. Riders change teams between
+                    # seasons, so a result must carry its own team rather than
+                    # borrow the rider's current one.
+                    "team":team,
                 })
                 ev_cats.add(canon); ev_results+=1
                 if status=="?": issues["bad_time"].append(f"{year}/{race}/{raw_tab}: {raw}")

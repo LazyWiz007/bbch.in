@@ -43,7 +43,7 @@ export function EventResults({
     return results.filter(
       (r) =>
         r.athlete.name.toLowerCase().includes(q) ||
-        (r.athlete.team ?? "").toLowerCase().includes(q) ||
+        (r.team ?? r.athlete.team ?? "").toLowerCase().includes(q) ||
         (r.bib != null && String(r.bib) === q)
     );
   }, [searching, q, results, cat]);
